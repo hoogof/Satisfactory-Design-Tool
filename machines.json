@@ -1,0 +1,194 @@
+[
+  {
+    "id": "smelter",
+    "name": "Smelter",
+    "category": "Smelting",
+    "powerConsumptionMW": 4.0,
+    "tier": 0,
+    "description": "The Smelter is a building used to smelt raw ores into ingots."
+  },
+  {
+    "id": "foundry",
+    "name": "Foundry",
+    "category": "Smelting",
+    "powerConsumptionMW": 16.0,
+    "tier": 3,
+    "description": "The Foundry is a building that smelts two ore resources into alloy ingots. It cannot be used for smelting single ore resources into single ingot resources nor does it behave like a Mk.2 Smelter ."
+  },
+  {
+    "id": "constructor",
+    "name": "Constructor",
+    "category": "Production",
+    "powerConsumptionMW": 4.0,
+    "tier": 0,
+    "description": "The Constructor is a building used to automate the production of single-ingredient parts."
+  },
+  {
+    "id": "assembler",
+    "name": "Assembler",
+    "category": "Production",
+    "powerConsumptionMW": 15.0,
+    "tier": 0,
+    "description": "The Assembler is a building used to automate the production of two-ingredient parts. It is not capable of alloying ingots, which is done by the Foundry ."
+  },
+  {
+    "id": "manufacturer",
+    "name": "Manufacturer",
+    "category": "Production",
+    "powerConsumptionMW": 55.0,
+    "tier": 4,
+    "description": "The Manufacturer is a building used to automate the production of three or four-ingredient items."
+  },
+  {
+    "id": "refinery",
+    "name": "Refinery",
+    "category": "Refining",
+    "powerConsumptionMW": 30.0,
+    "tier": 3,
+    "description": "The Refinery is a building used for crafting recipes involving fluids . Most notably, this includes recipes transforming Crude Oil into Rubber , Plastic , or Fuel , but it is also used as part of advanced production recipes, such as refining Bauxite into Alumina Solution and then further into Alumin"
+  },
+  {
+    "id": "blender",
+    "name": "Blender",
+    "category": "Refining",
+    "powerConsumptionMW": 75.0,
+    "tier": 7,
+    "description": "The Blender is a late-game building used for a wide variety of late-game recipes involving both fluids and solid resources."
+  },
+  {
+    "id": "packager",
+    "name": "Packager",
+    "category": "Packaging",
+    "powerConsumptionMW": 10.0,
+    "tier": 5,
+    "description": "The Packager is a building used to package and unpackage fluids in and out of Empty Canisters or Empty Fluid Tanks . Both Canisters and Fluid Tanks are returned when fluid is unpackaged from them, allowing them to be reused. Packaged liquids can be transported with Conveyor Belts - this can be more "
+  },
+  {
+    "id": "particle-accelerator",
+    "name": "Particle Accelerator",
+    "category": "Advanced",
+    "powerConsumptionMW": 0.0,
+    "tier": 8,
+    "description": "The Particle Accelerator is a building used to craft advanced late-game recipes. Unlike most other production buildings, its power consumption fluctuates and varies per selected recipe. The least power is consumed at the beginning of a crafting cycle and it increases to the maximum throughout the du"
+  },
+  {
+    "id": "quantum-encoder",
+    "name": "Quantum Encoder",
+    "category": "Advanced",
+    "powerConsumptionMW": 0.0,
+    "tier": 9,
+    "description": "The Quantum Encoder is a building used for producing late-game items. Every recipe in the Quantum Encoder consumes Excited Photonic Matter and produces Dark Matter Residue in 1:1 ratios."
+  },
+  {
+    "id": "converter",
+    "name": "Converter",
+    "category": "Advanced",
+    "powerConsumptionMW": 0.0,
+    "tier": 9,
+    "description": "The Converter is a late-game building used to convert ores into each other at the cost of Reanimated SAM , as well as produce Ficsite Ingots , Excited Photonic Matter and Dark Matter Residue ."
+  },
+  {
+    "id": "nuclear-power-plant",
+    "name": "Nuclear Power Plant",
+    "category": "Power",
+    "powerConsumptionMW": 0.0,
+    "tier": 8,
+    "description": "The Nuclear Power Plant is a power generator building that generates power by burning Uranium Fuel Rods , Plutonium Fuel Rods or Ficsonium Fuel Rods . The former two produce Uranium Waste or Plutonium Waste respectively."
+  },
+  {
+    "id": "biomass-burner",
+    "name": "Biomass Burner",
+    "category": "Power",
+    "powerConsumptionMW": 0.0,
+    "tier": 0,
+    "description": "The Biomass Burner is a power generator building that generates power by burning various biomass items. These materials can be gathered from trees , shrubs , and most flora and fauna found in the world. Later these raw materials can be refined into Biomass and Solid Biofuel for higher fuel efficienc"
+  },
+  {
+    "id": "coal-generator",
+    "name": "Coal Generator",
+    "category": "Power",
+    "powerConsumptionMW": 0.0,
+    "tier": 3,
+    "description": "The Coal-Powered Generator is a power generator building that generates power by burning Coal , Compacted Coal or Petroleum Coke and Water . It is the first fully automated power source the pioneer has access to and also the first power source to use a mined resource."
+  },
+  {
+    "id": "fuel-generator",
+    "name": "Fuel Generator",
+    "category": "Power",
+    "powerConsumptionMW": 0.0,
+    "tier": 5,
+    "description": "The Fuel-Powered Generator is a power generator building that generates power by burning liquid fuel ( Fuel , Liquid Biofuel , Turbofuel ) or gaseous fuel ( Rocket Fuel , or Ionized Fuel )."
+  },
+  {
+    "id": "geothermal-generator",
+    "name": "Geothermal Generator",
+    "category": "Power",
+    "powerConsumptionMW": 0.0,
+    "tier": 0,
+    "description": "The Geothermal Generator is a power generator building that generates 50-600 MW of power when built on top of a Geyser . It requires no additional input."
+  },
+  {
+    "id": "water-extractor",
+    "name": "Water Extractor",
+    "category": "Extraction",
+    "powerConsumptionMW": 20.0,
+    "tier": 3,
+    "description": "The Water Extractor is a Building used to pump Water out of water bodies. It has one Pipeline output with a recommended head lift of 10 meters."
+  },
+  {
+    "id": "oil-extractor",
+    "name": "Oil Extractor",
+    "category": "Extraction",
+    "powerConsumptionMW": 40.0,
+    "tier": 5,
+    "description": "The Oil Extractor is a building used to extract fluid Crude Oil from its Resource Node . The default extraction rate is 120 m 3 /min, based on normal node purity (see below)."
+  },
+  {
+    "id": "resource-well-pressurizer",
+    "name": "Resource Well Pressurizer",
+    "category": "Extraction",
+    "powerConsumptionMW": 150.0,
+    "tier": 8,
+    "description": "The Resource Well Pressurizer is a late game building used for pressurizing a Resource Well by building one on it. Afterwards, fluid resources can be extracted from the satellite nodes by building Resource Well Extractors on them. Pipelines can be connected to the Extractors to obtain the extracted "
+  },
+  {
+    "id": "miner-mk-1",
+    "name": "Miner Mk.1",
+    "category": "Extraction",
+    "powerConsumptionMW": 0.0,
+    "tier": 0,
+    "description": "A Miner is a type of resource extractor that automatically extracts solid resources when built or placed on top of a Resource Node . There are 4 types of miners available: Portable Miner , Miner Mk.1 , Miner Mk.2 and Miner Mk.3 ."
+  },
+  {
+    "id": "miner-mk-2",
+    "name": "Miner Mk.2",
+    "category": "Extraction",
+    "powerConsumptionMW": 0.0,
+    "tier": 0,
+    "description": "A Miner is a type of resource extractor that automatically extracts solid resources when built or placed on top of a Resource Node . There are 4 types of miners available: Portable Miner , Miner Mk.1 , Miner Mk.2 and Miner Mk.3 ."
+  },
+  {
+    "id": "miner-mk-3",
+    "name": "Miner Mk.3",
+    "category": "Extraction",
+    "powerConsumptionMW": 0.0,
+    "tier": 0,
+    "description": "A Miner is a type of resource extractor that automatically extracts solid resources when built or placed on top of a Resource Node . There are 4 types of miners available: Portable Miner , Miner Mk.1 , Miner Mk.2 and Miner Mk.3 ."
+  },
+  {
+    "id": "craft-bench",
+    "name": "Craft Bench",
+    "category": "Other",
+    "powerConsumptionMW": 0.0,
+    "tier": 0,
+    "description": "The Crafting Bench is a manual crafting station, allowing to craft all unlocked components, except for:"
+  },
+  {
+    "id": "equipment-workshop",
+    "name": "Equipment Workshop",
+    "category": "Other",
+    "powerConsumptionMW": 0.0,
+    "tier": 0,
+    "description": "The Equipment Workshop is the station at which engineers can manually craft non-crafting components such as tools, ammunition and consumables."
+  }
+]
