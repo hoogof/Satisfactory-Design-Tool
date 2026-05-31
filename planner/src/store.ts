@@ -54,6 +54,57 @@ export function deriveFlowFromHandle(
     return null;
   }
 
+  if (src.type === 'factoryNode') {
+    // Handle ID: {factoryId}-factory-out-{item-slug}
+    const slug = sourceHandle.match(/factory-out-(.+)$/)?.[1];
+    if (!slug) return null;
+
+    // Replicate the same extOutputs logic as FactoryNode:
+    // sum unconnected outputs of interior recipe/source nodes that match the slug
+    const members   = nodes.filter(n => n.parentId === src.id);
+    const memberSet = new Set(members.map(n => n.id));
+
+    let totalRate = 0;
+    let foundItem: string | null = null;
+
+    for (const m of members) {
+      if (m.type === 'recipeNode') {
+        const d      = m.data as unknown as RecipeNodeData;
+        const recipe = d.recipe ?? recipeMap.get(d.recipeId);
+        if (!recipe) continue;
+        const scale = d.machineCount || 1;
+        for (const out of recipe.outputs) {
+          const outSlug = out.item.toLowerCase().replace(/[^a-z0-9]/g, '-');
+          if (outSlug !== slug) continue;
+          // Only count if this output isn't consumed internally
+          const hid      = `${m.id}-out-${outSlug}`;
+          const internal = edges.some(
+            e => e.source === m.id && e.sourceHandle === hid && memberSet.has(e.target)
+          );
+          if (!internal) {
+            totalRate += out.ratePerMin * scale;
+            foundItem = out.item;
+          }
+        }
+      } else if (m.type === 'sourceNode') {
+        const d       = m.data as unknown as SourceNodeData;
+        const srcSlug = (d.item || '').toLowerCase().replace(/[^a-z0-9]/g, '-');
+        if (srcSlug !== slug) continue;
+        const hid      = `${m.id}-out`;
+        const internal = edges.some(
+          e => e.source === m.id && e.sourceHandle === hid && memberSet.has(e.target)
+        );
+        if (!internal) {
+          totalRate += d.ratePerMin || 0;
+          foundItem = d.item;
+        }
+      }
+    }
+
+    if (foundItem) return { item: foundItem, rate: totalRate };
+    return null;
+  }
+
   if (src.type === 'splitterMergerNode') {
     const d = src.data as unknown as SplitterMergerNodeData;
     const outIdx = parseInt(sourceHandle.match(/sm-out-(\d+)$/)?.[1] ?? 'NaN');
@@ -129,6 +180,14 @@ export function getCategoryColor(machineName: string): string {
 let nodeIdCounter = 1;
 export function nextId() {
   return `node_${nodeIdCounter++}`;
+}
+
+/** Advance the counter past the highest numeric ID in the given node list. */
+function seedCounter(nodes: Node[]) {
+  for (const n of nodes) {
+    const num = parseInt(n.id.replace('node_', ''), 10);
+    if (!isNaN(num) && num >= nodeIdCounter) nodeIdCounter = num + 1;
+  }
 }
 
 // Propagate a scale ratio to connected nodes.
@@ -243,6 +302,7 @@ export interface SavedSlot {
 }
 
 function hydrateNodes(nodes: Node[]): Node[] {
+  seedCounter(nodes);
   return sortNodes(nodes.map(n => {
     const base = { ...n, dragHandle: DRAG_HANDLE };
     if (n.type === 'recipeNode') {

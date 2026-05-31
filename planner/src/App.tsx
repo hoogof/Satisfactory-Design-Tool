@@ -23,6 +23,7 @@ import { SplitterMergerNode } from './nodes/SplitterMergerNode';
 import { DeletableEdge } from './edges/DeletableEdge';
 import { Sidebar } from './components/Sidebar';
 import { QuickSearch } from './components/QuickSearch';
+import { HelpModal } from './components/HelpModal';
 import { usePlannerStore, recipeMap, getCategoryColor } from './store';
 import type { RecipeNodeData, SplitterMergerNodeData } from './types';
 
@@ -47,6 +48,45 @@ function useEdgeStyles(nodes: Node[], edges: Edge[]): Edge[] {
 
     if (sourceNode.type === 'sourceNode') {
       color = '#22c55e';
+    } else if (sourceNode.type === 'factoryNode') {
+      // Use deriveFlowFromHandle to get the rate from the factory border output
+      const flow = (window as unknown as Record<string, unknown>)._deriveFlow
+        ? null // placeholder
+        : null;
+      void flow;
+      // Inline: factory output handle carries a known rate — always green if connected
+      const slug = edge.sourceHandle?.match(/factory-out-(.+)$/)?.[1];
+      if (slug) {
+        const members   = nodes.filter(n => n.parentId === sourceNode.id);
+        const memberSet = new Set(members.map(n => n.id));
+        let totalRate = 0;
+        for (const m of members) {
+          if (m.type === 'recipeNode') {
+            const d = m.data as unknown as RecipeNodeData;
+            const recipe = d.recipe ?? recipeMap.get(d.recipeId);
+            if (!recipe) continue;
+            for (const out of recipe.outputs) {
+              if (out.item.toLowerCase().replace(/[^a-z0-9]/g, '-') !== slug) continue;
+              const hid = `${m.id}-out-${slug}`;
+              const internal = edges.some(e => e.source === m.id && e.sourceHandle === hid && memberSet.has(e.target));
+              if (!internal) totalRate += out.ratePerMin * (d.machineCount || 1);
+            }
+          }
+        }
+        if (targetNode.type === 'recipeNode') {
+          const tgtData   = targetNode.data as unknown as RecipeNodeData;
+          const tgtRecipe = tgtData.recipe ?? recipeMap.get(tgtData.recipeId);
+          const tgtSlug   = edge.targetHandle?.match(/-in-(.+)$/)?.[1];
+          if (tgtRecipe && tgtSlug) {
+            const inp = tgtRecipe.inputs.find(i => i.item.toLowerCase().replace(/[\s']/g, '-') === tgtSlug);
+            if (inp) {
+              color = totalRate >= inp.ratePerMin * (tgtData.machineCount || 1) - 0.01 ? '#22c55e' : '#ef4444';
+            } else { color = '#22c55e'; }
+          } else { color = '#22c55e'; }
+        } else {
+          color = totalRate > 0 ? '#22c55e' : '#94a3b8';
+        }
+      }
     } else if (sourceNode.type === 'splitterMergerNode') {
       const srcData = sourceNode.data as unknown as SplitterMergerNodeData;
       const outIdx = parseInt(edge.sourceHandle?.match(/sm-out-(\d+)$/)?.[1] ?? 'NaN');
@@ -186,6 +226,8 @@ function PlannerCanvas({ dark }: { dark: boolean }) {
           }}
           maskColor="var(--minimap-mask)"
           style={{ background: 'var(--bg-panel)', border: '1px solid var(--border)' }}
+          zoomable
+          pannable
         />
       </ReactFlow>
     </div>
@@ -195,6 +237,7 @@ function PlannerCanvas({ dark }: { dark: boolean }) {
 export default function App() {
   const [dark, setDark]               = useState(true);
   const [quickSearch, setQuickSearch] = useState(false);
+  const [showHelp, setShowHelp]       = useState(false);
   const { autoScale, toggleAutoScale } = usePlannerStore();
 
   useEffect(() => {
@@ -249,10 +292,18 @@ export default function App() {
           >
             ⌕ Search recipes <kbd>N</kbd>
           </button>
+          <button
+            className="toolbar__btn"
+            onClick={() => setShowHelp(true)}
+            title="Help"
+          >
+            ? Help
+          </button>
         </div>
         <Sidebar />
         <PlannerCanvas dark={dark} />
         {quickSearch && <QuickSearch onClose={() => setQuickSearch(false)} />}
+        {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
       </div>
     </ReactFlowProvider>
   );

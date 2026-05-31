@@ -116,7 +116,10 @@ export function Sidebar() {
             <span className="sidebar__title-op">Op</span><span className="sidebar__title-tim">tim</span>
           </h2>
         </div>
-        <p className="sidebar__subtitle">Satisfactory Factory Planner</p>
+        <div className="sidebar__subtitle-row">
+          <p className="sidebar__subtitle">Satisfactory Factory Planner</p>
+          <span className="sidebar__alpha-badge" title="This tool is in early development — expect bugs and missing features">⚠ Alpha</span>
+        </div>
       </div>
 
       {/* Quick-add buttons */}
