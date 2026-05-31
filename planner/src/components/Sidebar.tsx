@@ -1,5 +1,7 @@
 import { useState, useMemo } from 'react';
+import { useReactFlow } from '@xyflow/react';
 import { allRecipes, allMachines, CATEGORY_COLORS, usePlannerStore } from '../store';
+import type { SavedSlot } from '../store';
 import type { Recipe, RecipeNodeData } from '../types';
 
 // Group recipes by their primary machine
@@ -16,7 +18,27 @@ function groupByMachine(recipes: Recipe[]): Map<string, Recipe[]> {
 export function Sidebar() {
   const [query, setQuery] = useState('');
   const [showAlternates, setShowAlternates] = useState(false);
-  const { addRecipeNode, addSourceNode, addFactoryNode, addToFactory, nodes, edges } = usePlannerStore();
+  const [saveName, setSaveName] = useState('');
+  const { addRecipeNode, addSourceNode, addFactoryNode, addToFactory, nodes, edges,
+          savedSlots, saveSlot, loadSlot, deleteSlot } = usePlannerStore();
+  const { screenToFlowPosition } = useReactFlow();
+
+  // Convert the canvas centre (screen coords) to flow coords
+  const viewportCenter = () => {
+    const canvas = document.querySelector('.planner-canvas');
+    if (!canvas) return { x: 300, y: 200 };
+    const { left, top, width, height } = canvas.getBoundingClientRect();
+    return screenToFlowPosition({
+      x: left + width  / 2,
+      y: top  + height / 2,
+    });
+  };
+
+  // Small random spread so successive nodes don't perfectly stack
+  const spawnPos = () => {
+    const c = viewportCenter();
+    return { x: c.x + (Math.random() - 0.5) * 80, y: c.y + (Math.random() - 0.5) * 80 };
+  };
 
   // Split selection into factory nodes and regular nodes
   const selectedAll      = useMemo(() => nodes.filter(n => n.selected), [nodes]);
@@ -90,13 +112,13 @@ export function Sidebar() {
       <div className="sidebar__section sidebar__add-row">
         <button
           className="sidebar__btn sidebar__btn--add-node"
-          onClick={() => addRecipeNode('', { x: 300 + Math.random() * 100, y: 150 + nodes.length * 20 })}
+          onClick={() => addRecipeNode('', spawnPos())}
         >
           + Node
         </button>
         <button
           className="sidebar__btn sidebar__btn--add-source"
-          onClick={() => addSourceNode('Iron Ore', { x: 80, y: 80 + nodes.length * 30 })}
+          onClick={() => addSourceNode('Iron Ore', spawnPos())}
         >
           + Source
         </button>
@@ -127,43 +149,84 @@ export function Sidebar() {
         )}
       </div>
 
-      {/* Save / Load */}
-      <div className="sidebar__section sidebar__io">
-        <button
-          className="sidebar__btn"
-          onClick={() => {
-            const json = usePlannerStore.getState().exportJSON();
-            const blob = new Blob([json], { type: 'application/json' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'satisfactory-plan.json';
-            a.click();
-          }}
-        >
-          💾 Export
-        </button>
-        <label className="sidebar__btn sidebar__btn--upload">
-          📂 Import
+      {/* Saves */}
+      <div className="sidebar__section sidebar__saves">
+        <div className="sidebar__save-row">
           <input
-            type="file"
-            accept=".json"
-            style={{ display: 'none' }}
-            onChange={e => {
-              const file = e.target.files?.[0];
-              if (!file) return;
-              file.text().then(text => usePlannerStore.getState().importJSON(text));
-              e.target.value = '';
+            className="sidebar__save-input"
+            placeholder="Save name…"
+            value={saveName}
+            onChange={e => setSaveName(e.target.value)}
+            onKeyDown={e => {
+              if (e.key === 'Enter' && saveName.trim()) {
+                saveSlot(saveName);
+                setSaveName('');
+              }
             }}
           />
-        </label>
-        <button
-          className="sidebar__btn sidebar__btn--danger"
-          onClick={() => {
-            if (confirm('Clear all nodes and edges?')) usePlannerStore.getState().clearAll();
-          }}
-        >
-          🗑 Clear
-        </button>
+          <button
+            className="sidebar__btn sidebar__btn--save"
+            disabled={!saveName.trim()}
+            onClick={() => { saveSlot(saveName); setSaveName(''); }}
+          >
+            Save
+          </button>
+        </div>
+
+        {savedSlots.length > 0 && (
+          <ul className="sidebar__slot-list">
+            {savedSlots.map((slot: SavedSlot) => (
+              <li key={slot.id} className="sidebar__slot">
+                <div className="sidebar__slot-info">
+                  <span className="sidebar__slot-name">{slot.name}</span>
+                  <span className="sidebar__slot-date">
+                    {new Date(slot.savedAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })}
+                  </span>
+                </div>
+                <div className="sidebar__slot-actions">
+                  <button className="sidebar__slot-btn" onClick={() => loadSlot(slot.id)} title="Load">↩</button>
+                  <button className="sidebar__slot-btn sidebar__slot-btn--del" onClick={() => { if (confirm(`Delete "${slot.name}"?`)) deleteSlot(slot.id); }} title="Delete">✕</button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="sidebar__io-row">
+          <button
+            className="sidebar__btn sidebar__btn--sm"
+            onClick={() => {
+              const json = usePlannerStore.getState().exportJSON();
+              const blob = new Blob([json], { type: 'application/json' });
+              const a = document.createElement('a');
+              a.href = URL.createObjectURL(blob);
+              a.download = 'satisfactory-plan.json';
+              a.click();
+            }}
+          >
+            ↓ Export
+          </button>
+          <label className="sidebar__btn sidebar__btn--sm">
+            ↑ Import
+            <input
+              type="file"
+              accept=".json"
+              style={{ display: 'none' }}
+              onChange={e => {
+                const file = e.target.files?.[0];
+                if (!file) return;
+                file.text().then(text => usePlannerStore.getState().importJSON(text));
+                e.target.value = '';
+              }}
+            />
+          </label>
+          <button
+            className="sidebar__btn sidebar__btn--sm sidebar__btn--danger"
+            onClick={() => { if (confirm('Clear all nodes and edges?')) usePlannerStore.getState().clearAll(); }}
+          >
+            🗑 Clear
+          </button>
+        </div>
       </div>
 
       {/* Recipe search */}
@@ -205,7 +268,7 @@ export function Sidebar() {
                   <li key={r.id} className="sidebar__recipe-item">
                     <button
                       className="sidebar__recipe-btn"
-                      onClick={() => addRecipeNode(r.id, { x: 300 + Math.random() * 200, y: 100 + Math.random() * 400 })}
+                      onClick={() => addRecipeNode(r.id, spawnPos())}
                       title={`Inputs: ${r.inputs.map(i => `${i.item} (${i.ratePerMin}/min)`).join(', ')}`}
                     >
                       {r.isAlternate && <span className="sidebar__alt-badge">ALT</span>}

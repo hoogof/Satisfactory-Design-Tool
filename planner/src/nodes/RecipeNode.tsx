@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Handle, Position, type NodeProps } from '@xyflow/react';
 import type { RecipeNodeData } from '../types';
 import { getCategoryColor, usePlannerStore, allRecipes, allMachines } from '../store';
@@ -40,11 +40,19 @@ function handleTops(count: number, headerHeight = 72, footerHeight = 36, rowHeig
 export const RecipeNode = memo(({ id, data, selected }: NodeProps) => {
   const d = data as unknown as RecipeNodeData;
   const recipe = d.recipe;
-  const { updateNodeData, deleteNode } = usePlannerStore();
+  const { updateNodeData, deleteNode, scaleConnectedNodes, deleteEdgesForHandle } = usePlannerStore();
 
   const color = getCategoryColor(d.selectedMachine ?? '');
 
   const [countStr, setCountStr] = useState(String(d.machineCount ?? 1));
+  const countInputRef = useRef<HTMLInputElement>(null);
+
+  // Sync display when machineCount is changed externally (e.g. auto-scale)
+  useEffect(() => {
+    if (countInputRef.current !== document.activeElement) {
+      setCountStr(String(d.machineCount ?? 1));
+    }
+  }, [d.machineCount]);
 
   const recipeOptions = useMemo(() =>
     [...allRecipes].sort((a, b) => {
@@ -75,9 +83,15 @@ export const RecipeNode = memo(({ id, data, selected }: NodeProps) => {
   const commitCount = useCallback(() => {
     const evaluated = evalMath(countStr);
     const final = evaluated ?? 1;
+    // Read the live store value — avoids stale-closure issues with d.machineCount
+    const liveNode = usePlannerStore.getState().nodes.find(n => n.id === id);
+    const prev = ((liveNode?.data as unknown as RecipeNodeData)?.machineCount) ?? 1;
     setCountStr(String(final));
     updateNodeData(id, { machineCount: final });
-  }, [countStr, id, updateNodeData]);
+    if (final !== prev && prev > 0) {
+      scaleConnectedNodes(id, final / prev);
+    }
+  }, [countStr, id, updateNodeData, scaleConnectedNodes]);
 
   const handleCountKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -115,7 +129,8 @@ export const RecipeNode = memo(({ id, data, selected }: NodeProps) => {
             id={handleId(id, inp.item, 'in')}
             className={`node-handle node-handle--in${!sufficient ? ' node-handle--deficit' : ''}`}
             style={{ top: `${inputTops[i]}%` }}
-            title={`${inp.item} · ${(inp.ratePerMin * scale).toFixed(2)}/min`}
+            title={`${inp.item} · ${(inp.ratePerMin * scale).toFixed(2)}/min — double-click to disconnect`}
+            onDoubleClick={() => deleteEdgesForHandle(handleId(id, inp.item, 'in'))}
           />
         );
       })}
@@ -129,7 +144,8 @@ export const RecipeNode = memo(({ id, data, selected }: NodeProps) => {
           id={handleId(id, out.item, 'out')}
           className="node-handle node-handle--out"
           style={{ top: `${outputTops[i]}%` }}
-          title={`${out.item} · ${(out.ratePerMin * scale).toFixed(2)}/min`}
+          title={`${out.item} · ${(out.ratePerMin * scale).toFixed(2)}/min — double-click to disconnect`}
+          onDoubleClick={() => deleteEdgesForHandle(handleId(id, out.item, 'out'))}
         />
       ))}
 
@@ -191,6 +207,7 @@ export const RecipeNode = memo(({ id, data, selected }: NodeProps) => {
         <label className="recipe-node__count-label">
           ×
           <input
+            ref={countInputRef}
             type="text"
             inputMode="decimal"
             value={countStr}

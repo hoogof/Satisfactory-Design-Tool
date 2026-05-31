@@ -82,12 +82,18 @@ body {
 .app { display: flex; height: 100vh; width: 100vw; }
 .planner-canvas { flex: 1; height: 100%; }
 
-/* ── Theme toggle button ──────────────────────────────────── */
-.theme-toggle {
+/* ── Top-right toolbar ────────────────────────────────────── */
+.toolbar {
   position: absolute;
   top: 12px;
   right: 16px;
   z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbar__btn {
   background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 20px;
@@ -96,13 +102,24 @@ body {
   color: var(--text-secondary);
   cursor: pointer;
   box-shadow: var(--shadow-sm);
-  transition: background 0.15s, color 0.15s;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
   display: flex;
   align-items: center;
   gap: 6px;
   user-select: none;
+  white-space: nowrap;
 }
-.theme-toggle:hover { background: var(--bg-input); color: var(--text-primary); }
+.toolbar__btn:hover { background: var(--bg-input); color: var(--text-primary); }
+
+.toolbar__btn--active {
+  background: color-mix(in srgb, #6366f1 18%, var(--bg-panel));
+  border-color: #6366f1;
+  color: #818cf8;
+}
+.toolbar__btn--active:hover {
+  background: color-mix(in srgb, #6366f1 28%, var(--bg-panel));
+  color: #a5b4fc;
+}
 
 /* ── Sidebar ──────────────────────────────────────────────── */
 .sidebar {
@@ -198,6 +215,70 @@ body {
 .sidebar__btn--disabled:hover { background: rgba(245,158,11,0.1); color: #d97706; }
 
 .sidebar__io { display: flex; gap: 5px; }
+
+/* ── Saves panel ───────────────────────────────────────────── */
+.sidebar__saves { display: flex; flex-direction: column; gap: 6px; }
+
+.sidebar__save-row { display: flex; gap: 6px; }
+
+.sidebar__save-input {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 8px;
+  font-size: 12px;
+  color: var(--text-primary);
+  outline: none;
+}
+.sidebar__save-input:focus { border-color: #6366f1; }
+
+.sidebar__btn--save {
+  background: color-mix(in srgb, #6366f1 20%, var(--bg-input));
+  border-color: #6366f1;
+  color: #818cf8;
+  white-space: nowrap;
+}
+.sidebar__btn--save:hover:not(:disabled) { background: #6366f1; color: #fff; }
+.sidebar__btn--save:disabled { opacity: 0.4; cursor: default; }
+
+.sidebar__slot-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px; }
+
+.sidebar__slot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 5px 8px;
+}
+
+.sidebar__slot-info { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.sidebar__slot-name { font-size: 12px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sidebar__slot-date { font-size: 10px; color: var(--text-muted); }
+
+.sidebar__slot-actions { display: flex; gap: 3px; flex-shrink: 0; }
+.sidebar__slot-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 12px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s, color 0.12s;
+}
+.sidebar__slot-btn:hover { background: var(--bg-panel); color: var(--text-primary); }
+.sidebar__slot-btn--del:hover { background: var(--red); border-color: var(--red); color: #fff; }
+
+.sidebar__io-row { display: flex; gap: 5px; }
+.sidebar__btn--sm { font-size: 11px; padding: 4px 8px; }
 
 .sidebar__btn {
   flex: 1;
@@ -698,7 +779,8 @@ body {
 /* ── Deletable edge ───────────────────────────────────────── */
 
 /* The hit area path — keeps the hover zone wide */
-.deletable-edge__hitarea { pointer-events: stroke; }
+/* While Shift is held, pass all edge events through so box-select works */
+body.shift-held .react-flow__edge { pointer-events: none; }
 
 /* Wrapper for the × button — positioned at edge midpoint */
 .deletable-edge__btn-wrap {

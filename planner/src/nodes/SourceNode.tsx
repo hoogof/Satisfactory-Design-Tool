@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Handle, Position, type NodeProps } from '@xyflow/react';
 import type { SourceNodeData } from '../types';
 import { usePlannerStore, RAW_RESOURCES } from '../store';
@@ -22,9 +22,17 @@ function evalMath(expr: string): number | null {
 
 export const SourceNode = memo(({ id, data, selected }: NodeProps) => {
   const d = data as unknown as SourceNodeData;
-  const { updateNodeData, deleteNode } = usePlannerStore();
+  const { updateNodeData, deleteNode, deleteEdgesForHandle } = usePlannerStore();
 
   const [rateStr, setRateStr] = useState(String(d.ratePerMin ?? 60));
+  const rateInputRef = useRef<HTMLInputElement>(null);
+
+  // Sync display when ratePerMin is changed externally (e.g. auto-scale)
+  useEffect(() => {
+    if (rateInputRef.current !== document.activeElement) {
+      setRateStr(String(d.ratePerMin ?? 60));
+    }
+  }, [d.ratePerMin]);
 
   const handleResourceChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
     const res = RAW_RESOURCES.find(r => r.name === e.target.value);
@@ -54,6 +62,8 @@ export const SourceNode = memo(({ id, data, selected }: NodeProps) => {
         id={`${id}-out`}
         className="node-handle node-handle--out"
         style={{ top: '50%' }}
+        title="Double-click to disconnect"
+        onDoubleClick={() => deleteEdgesForHandle(`${id}-out`)}
       />
 
       <div className="source-node__header node-drag-handle">
@@ -80,6 +90,7 @@ export const SourceNode = memo(({ id, data, selected }: NodeProps) => {
             type="text"
             inputMode="decimal"
             value={rateStr}
+            ref={rateInputRef}
             onChange={e => setRateStr(e.target.value)}
             onBlur={commitRate}
             onKeyDown={handleRateKeyDown}

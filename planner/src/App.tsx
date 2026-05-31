@@ -5,6 +5,7 @@ import {
   BackgroundVariant,
   Controls,
   MiniMap,
+  SelectionMode,
   type NodeTypes,
   type Node,
   type Edge,
@@ -124,6 +125,11 @@ function PlannerCanvas({ dark }: { dark: boolean }) {
         deleteKeyCode="Delete"
         minZoom={0.1}
         maxZoom={2}
+        selectionMode={SelectionMode.Partial}
+        multiSelectionKeyCode="Shift"
+        selectionOnDrag
+        panOnDrag={[2]}
+        onContextMenu={e => e.preventDefault()}
         defaultEdgeOptions={{
           type: 'default',
           style: { strokeWidth: 2 },
@@ -160,23 +166,43 @@ function PlannerCanvas({ dark }: { dark: boolean }) {
 }
 
 export default function App() {
-  // Default to dark (black grid canvas)
   const [dark, setDark] = useState(true);
+  const { autoScale, toggleAutoScale } = usePlannerStore();
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
   }, [dark]);
 
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => { if (e.key === 'Shift') document.body.classList.add('shift-held'); };
+    const onKeyUp   = (e: KeyboardEvent) => { if (e.key === 'Shift') document.body.classList.remove('shift-held'); };
+    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('keyup',   onKeyUp);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('keyup',   onKeyUp);
+    };
+  }, []);
+
   return (
     <ReactFlowProvider>
       <div className="app">
-        <button
-          className="theme-toggle"
-          onClick={() => setDark(d => !d)}
-          title="Toggle dark mode"
-        >
-          {dark ? '☀ Light' : '◑ Dark'}
-        </button>
+        <div className="toolbar">
+          <button
+            className={`toolbar__btn toolbar__btn--autoscale${autoScale ? ' toolbar__btn--active' : ''}`}
+            onClick={toggleAutoScale}
+            title="When on, changing a node's machine count scales all downstream nodes by the same ratio"
+          >
+            {autoScale ? '⛓ Auto-Scale ON' : '⛓ Auto-Scale OFF'}
+          </button>
+          <button
+            className="toolbar__btn"
+            onClick={() => setDark(d => !d)}
+            title="Toggle dark mode"
+          >
+            {dark ? '☀ Light' : '◑ Dark'}
+          </button>
+        </div>
         <Sidebar />
         <PlannerCanvas dark={dark} />
       </div>

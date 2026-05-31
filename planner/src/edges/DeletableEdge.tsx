@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   BaseEdge,
   EdgeLabelRenderer,
-  getSmoothStepPath,
+  getBezierPath,
   type EdgeProps,
   useReactFlow,
 } from '@xyflow/react';
@@ -22,14 +22,13 @@ export function DeletableEdge({
   const { setEdges } = useReactFlow();
   const [hovered, setHovered] = useState(false);
 
-  const [edgePath, labelX, labelY] = getSmoothStepPath({
+  const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
     sourceY,
     sourcePosition,
     targetX,
     targetY,
     targetPosition,
-    borderRadius: 12,
   });
 
   const deleteEdge = () =>
@@ -38,18 +37,16 @@ export function DeletableEdge({
   const visible = hovered || selected;
 
   return (
-    <>
-      {/* Wider invisible hit area — drives hover state */}
-      <path
-        d={edgePath}
-        fill="none"
-        stroke="transparent"
-        strokeWidth={16}
-        className="deletable-edge__hitarea"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+    // Wrapping <g> drives hover state for the delete button.
+    // BaseEdge renders its own 20px interaction path that handles
+    // selection clicks — we no longer need a custom hit area.
+    <g onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      <BaseEdge
+        path={edgePath}
+        markerEnd={markerEnd}
+        style={style}
+        interactionWidth={20}
       />
-      <BaseEdge path={edgePath} markerEnd={markerEnd} style={style} />
 
       <EdgeLabelRenderer>
         <div
@@ -68,6 +65,6 @@ export function DeletableEdge({
           </button>
         </div>
       </EdgeLabelRenderer>
-    </>
+    </g>
   );
 }

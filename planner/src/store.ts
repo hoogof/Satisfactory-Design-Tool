@@ -67,6 +67,70 @@ export function nextId() {
   return `node_${nodeIdCounter++}`;
 }
 
+// Propagate a scale ratio to connected nodes.
+// bidirectional=false → downstream only (source→target); used on connect.
+// bidirectional=true  → both directions; used on manual count change.
+// Skips startNodeId itself. Does NOT check autoScale flag.
+function propagateScale(
+  get: () => { nodes: Node[]; edges: Edge[] },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  set: (fn: (s: any) => any) => void,
+  startNodeId: string,
+  ratio: number,
+  bidirectional: boolean
+) {
+  if (ratio === 1 || ratio <= 0 || !isFinite(ratio)) return;
+  const { edges } = get();
+  const visited = new Set<string>();
+  visited.add(startNodeId);
+
+  const scaleOne = (nodeId: string) => {
+    set((state: { nodes: Node[] }) => {
+      const node = state.nodes.find(n => n.id === nodeId);
+      if (!node) return state;
+      const d = node.data as Record<string, unknown>;
+      if (node.type === 'recipeNode') {
+        const cur = (d.machineCount as number) ?? 1;
+        return {
+          nodes: state.nodes.map(n =>
+            n.id === nodeId
+              ? { ...n, data: { ...n.data, machineCount: Math.round(cur * ratio * 10000) / 10000 } }
+              : n
+          ),
+        };
+      }
+      if (node.type === 'sourceNode') {
+        const cur = (d.ratePerMin as number) ?? 60;
+        return {
+          nodes: state.nodes.map(n =>
+            n.id === nodeId
+              ? { ...n, data: { ...n.data, ratePerMin: Math.round(cur * ratio * 10000) / 10000 } }
+              : n
+          ),
+        };
+      }
+      return state;
+    });
+  };
+
+  const walk = (nodeId: string) => {
+    if (visited.has(nodeId)) return;
+    visited.add(nodeId);
+    scaleOne(nodeId);
+    // Always follow downstream
+    edges.filter(e => e.source === nodeId).forEach(e => walk(e.target));
+    // Follow upstream only when bidirectional
+    if (bidirectional) {
+      edges.filter(e => e.target === nodeId).forEach(e => walk(e.source));
+    }
+  };
+
+  edges.filter(e => e.source === startNodeId).forEach(e => walk(e.target));
+  if (bidirectional) {
+    edges.filter(e => e.target === startNodeId).forEach(e => walk(e.source));
+  }
+}
+
 export const DRAG_HANDLE = '.node-drag-handle';
 const PAD = 52;
 
@@ -103,9 +167,51 @@ function boundingBox(nodes: Node[]): { x: number; y: number; w: number; h: numbe
   return { x: minX, y: minY, w: maxX - minX, h: maxY - minY };
 }
 
+const LS_AUTOSAVE = 'planner-autosave';
+const LS_SLOTS    = 'planner-slots';
+
+export interface SavedSlot {
+  id:      string;
+  name:    string;
+  savedAt: string;
+  nodes:   Node[];
+  edges:   Edge[];
+}
+
+function hydrateNodes(nodes: Node[]): Node[] {
+  return sortNodes(nodes.map(n => {
+    const base = { ...n, dragHandle: DRAG_HANDLE };
+    if (n.type === 'recipeNode') {
+      const data = n.data as unknown as RecipeNodeData;
+      return { ...base, data: { ...data, recipe: recipeMap.get(data.recipeId) } };
+    }
+    return base;
+  }));
+}
+
+function loadAutosave(): { nodes: Node[]; edges: Edge[] } | null {
+  try {
+    const raw = localStorage.getItem(LS_AUTOSAVE);
+    if (!raw) return null;
+    const { nodes, edges } = JSON.parse(raw);
+    return { nodes: hydrateNodes(nodes), edges };
+  } catch { return null; }
+}
+
+function loadSlots(): SavedSlot[] {
+  try { return JSON.parse(localStorage.getItem(LS_SLOTS) ?? '[]'); }
+  catch { return []; }
+}
+
 interface PlannerState {
   nodes: Node[];
   edges: Edge[];
+  autoScale: boolean;
+  savedSlots: SavedSlot[];
+  toggleAutoScale: () => void;
+  saveSlot:   (name: string) => void;
+  loadSlot:   (id: string)   => void;
+  deleteSlot: (id: string)   => void;
   onNodesChange: OnNodesChange;
   onEdgesChange:  OnEdgesChange;
   onConnect:      OnConnect;
@@ -114,15 +220,51 @@ interface PlannerState {
   addFactoryNode: (memberIds: string[]) => void;
   addToFactory:   (factoryId: string, newMemberIds: string[]) => void;
   updateNodeData: (nodeId: string, patch: Record<string, unknown>) => void;
+  scaleConnectedNodes:    (startNodeId: string, ratio: number) => void;
+  deleteEdgesForHandle:   (handleId: string) => void;
   deleteNode:     (nodeId: string) => void;
   clearAll:       () => void;
   exportJSON:     () => string;
   importJSON:     (json: string) => void;
 }
 
+const _initial = loadAutosave();
+
 export const usePlannerStore = create<PlannerState>((set, get) => ({
-  nodes: [],
-  edges: [],
+  nodes: _initial?.nodes ?? [],
+  edges: _initial?.edges ?? [],
+  autoScale: true,
+  savedSlots: loadSlots(),
+
+  toggleAutoScale: () => set(s => ({ autoScale: !s.autoScale })),
+
+  saveSlot: (name) => {
+    const { nodes, edges } = get();
+    const trimmed = name.trim() || 'Unnamed';
+    const existing = get().savedSlots.find(s => s.name === trimmed);
+    const slot: SavedSlot = {
+      id:      existing?.id ?? `slot_${Date.now()}`,
+      name:    trimmed,
+      savedAt: new Date().toISOString(),
+      nodes,
+      edges,
+    };
+    const updated = [slot, ...get().savedSlots.filter(s => s.id !== slot.id)];
+    localStorage.setItem(LS_SLOTS, JSON.stringify(updated));
+    set({ savedSlots: updated });
+  },
+
+  loadSlot: (id) => {
+    const slot = get().savedSlots.find(s => s.id === id);
+    if (!slot) return;
+    set({ nodes: hydrateNodes(slot.nodes), edges: slot.edges });
+  },
+
+  deleteSlot: (id) => {
+    const updated = get().savedSlots.filter(s => s.id !== id);
+    localStorage.setItem(LS_SLOTS, JSON.stringify(updated));
+    set({ savedSlots: updated });
+  },
 
   onNodesChange: (changes) => {
     set({ nodes: applyNodeChanges(changes, get().nodes) });
@@ -134,6 +276,55 @@ export const usePlannerStore = create<PlannerState>((set, get) => ({
 
   onConnect: (connection) => {
     set({ edges: addEdge({ ...connection, animated: false }, get().edges) });
+
+    // Scale target node so its input rate matches the source's output rate
+    const { nodes } = get();
+    const srcNode = nodes.find(n => n.id === connection.source);
+    const tgtNode = nodes.find(n => n.id === connection.target);
+    if (!srcNode || !tgtNode || tgtNode.type !== 'recipeNode') return;
+
+    const tgtData  = tgtNode.data as unknown as RecipeNodeData;
+    const tgtRecipe = tgtData.recipe ?? recipeMap.get(tgtData.recipeId);
+    if (!tgtRecipe) return;
+
+    // Resolve the target input item from handle ID  e.g. "node_2-in-iron-ingot"
+    const tgtSlug = (connection.targetHandle ?? '').match(/-in-(.+)$/)?.[1];
+    if (!tgtSlug) return;
+    const tgtInput = tgtRecipe.inputs.find(
+      i => i.item.toLowerCase().replace(/[^a-z0-9]/g, '-') === tgtSlug
+    );
+    if (!tgtInput || tgtInput.ratePerMin <= 0) return;
+
+    // Resolve the source output rate
+    let srcRate: number | null = null;
+    if (srcNode.type === 'sourceNode') {
+      srcRate = (srcNode.data as unknown as SourceNodeData).ratePerMin ?? 60;
+    } else if (srcNode.type === 'recipeNode') {
+      const sd = srcNode.data as unknown as RecipeNodeData;
+      const srcRecipe = sd.recipe ?? recipeMap.get(sd.recipeId);
+      const srcSlug = (connection.sourceHandle ?? '').match(/-out-(.+)$/)?.[1];
+      if (srcRecipe && srcSlug) {
+        const srcOutput = srcRecipe.outputs.find(
+          o => o.item.toLowerCase().replace(/[^a-z0-9]/g, '-') === srcSlug
+        );
+        if (srcOutput) srcRate = srcOutput.ratePerMin * (sd.machineCount || 1);
+      }
+    }
+    if (srcRate === null || srcRate <= 0) return;
+
+    // newCount satisfies: tgtInput.ratePerMin * newCount === srcRate
+    const newCount  = Math.round((srcRate / tgtInput.ratePerMin) * 10000) / 10000;
+    const prevCount = tgtData.machineCount || 1;
+    if (newCount === prevCount) return;
+
+    set({
+      nodes: get().nodes.map(n =>
+        n.id === tgtNode.id ? { ...n, data: { ...n.data, machineCount: newCount } } : n
+      ),
+    });
+
+    // Propagate downstream only from the newly connected target
+    propagateScale(get, set, tgtNode.id, newCount / prevCount, false);
   },
 
   addRecipeNode: (recipeId = '', position = { x: 200, y: 200 }) => {
@@ -258,6 +449,21 @@ export const usePlannerStore = create<PlannerState>((set, get) => ({
     });
   },
 
+  // Scale all connected nodes by ratio. No-ops if autoScale is off.
+  scaleConnectedNodes: (startNodeId, ratio) => {
+    if (!get().autoScale) return;
+    // Manual count change: propagate bidirectionally (upstream + downstream)
+    propagateScale(get, set, startNodeId, ratio, true);
+  },
+
+  deleteEdgesForHandle: (handleId) => {
+    set({
+      edges: get().edges.filter(
+        e => e.sourceHandle !== handleId && e.targetHandle !== handleId
+      ),
+    });
+  },
+
   deleteNode: (nodeId) => {
     const { nodes } = get();
     const target = nodes.find(n => n.id === nodeId);
@@ -284,17 +490,16 @@ export const usePlannerStore = create<PlannerState>((set, get) => ({
   importJSON: (json) => {
     try {
       const { nodes, edges } = JSON.parse(json);
-      const hydrated = nodes.map((n: Node) => {
-        const base = { ...n, dragHandle: DRAG_HANDLE };
-        if (n.type === 'recipeNode') {
-          const data = n.data as unknown as RecipeNodeData;
-          return { ...base, data: { ...data, recipe: recipeMap.get(data.recipeId) } };
-        }
-        return base;
-      });
-      set({ nodes: sortNodes(hydrated), edges });
+      set({ nodes: hydrateNodes(nodes), edges });
     } catch (e) {
       console.error('Import failed', e);
     }
   },
 }));
+
+// Auto-save to localStorage on every nodes/edges change
+usePlannerStore.subscribe(({ nodes, edges }) => {
+  try {
+    localStorage.setItem(LS_AUTOSAVE, JSON.stringify({ nodes, edges }));
+  } catch { /* quota exceeded — silently ignore */ }
+});
