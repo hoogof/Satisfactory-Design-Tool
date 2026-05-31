@@ -9,7 +9,7 @@ import {
   type OnEdgesChange,
   type OnConnect,
 } from '@xyflow/react';
-import type { RecipeNodeData, SourceNodeData, FactoryNodeData } from './types';
+import type { RecipeNodeData, SourceNodeData, FactoryNodeData, SplitterMergerNodeData } from './types';
 import recipesRaw from './data/recipes.json';
 import machinesRaw from './data/machines.json';
 import type { Recipe, Machine } from './types';
@@ -20,15 +20,72 @@ export const allMachines: Machine[] = machinesRaw as Machine[];
 export const recipeMap = new Map<string, Recipe>(allRecipes.map(r => [r.id, r]));
 export const machineMap = new Map<string, Machine>(allMachines.map(m => [m.id, m]));
 
+/**
+ * Resolve the {item, rate} flowing out of a given source node handle.
+ * Handles sourceNode, recipeNode, and chained splitterMergerNode.
+ * Returns null if the handle is unresolvable (no recipe selected, etc.)
+ */
+export function deriveFlowFromHandle(
+  sourceNodeId: string,
+  sourceHandle: string,
+  nodes: Node[],
+  edges: Edge[],
+  depth = 0
+): { item: string; rate: number } | null {
+  if (depth > 8) return null;
+  const src = nodes.find(n => n.id === sourceNodeId);
+  if (!src) return null;
+
+  if (src.type === 'sourceNode') {
+    const d = src.data as unknown as SourceNodeData;
+    return { item: d.item || '', rate: d.ratePerMin || 0 };
+  }
+
+  if (src.type === 'recipeNode') {
+    const d = src.data as unknown as RecipeNodeData;
+    const recipe = d.recipe ?? recipeMap.get(d.recipeId);
+    const slug = sourceHandle.match(/-out-(.+)$/)?.[1];
+    if (recipe && slug) {
+      const out = recipe.outputs.find(
+        o => o.item.toLowerCase().replace(/[^a-z0-9]/g, '-') === slug
+      );
+      if (out) return { item: out.item, rate: out.ratePerMin * (d.machineCount || 1) };
+    }
+    return null;
+  }
+
+  if (src.type === 'splitterMergerNode') {
+    const d = src.data as unknown as SplitterMergerNodeData;
+    const outIdx = parseInt(sourceHandle.match(/sm-out-(\d+)$/)?.[1] ?? 'NaN');
+    if (isNaN(outIdx)) return null;
+    // Find the item by tracing upstream through this sm-node's inputs
+    const inCount = d.inputCount ?? 1;
+    for (let i = 0; i < inCount; i++) {
+      const upEdge = edges.find(e => e.targetHandle === `${sourceNodeId}-sm-in-${i}`);
+      if (!upEdge) continue;
+      const upstream = deriveFlowFromHandle(upEdge.source, upEdge.sourceHandle ?? '', nodes, edges, depth + 1);
+      if (upstream) {
+        const outRates = d.outputRates as number[] | undefined;
+        return { item: upstream.item, rate: outRates?.[outIdx] ?? 0 };
+      }
+    }
+    return null;
+  }
+
+  return null;
+}
+
+// Colors drawn from authentic Satisfactory item palette
+// tai-jee.github.io/satisfactory-colour-table
 export const CATEGORY_COLORS: Record<string, string> = {
-  Smelting:   '#b45309',
-  Production: '#1d4ed8',
-  Refining:   '#7e22ce',
-  Packaging:  '#0f766e',
-  Advanced:   '#be185d',
-  Power:      '#15803d',
-  Extraction: '#4d7c0f',
-  Other:      '#475569',
+  Smelting:   '#ae8176',   // Copper tone
+  Production: '#5bb0c5',   // FICSIT Blue
+  Refining:   '#957e4e',   // Caterium gold
+  Packaging:  '#908277',   // Concrete grey
+  Advanced:   '#ca6707',   // Ficsite orange
+  Power:      '#62b944',   // Resource green
+  Extraction: '#6abf4b',   // Leaf green
+  Other:      '#606161',   // Iron grey
 };
 
 // All raw resources extractable in Satisfactory
@@ -48,9 +105,16 @@ export const RAW_RESOURCES: { name: string; defaultRate: number }[] = [
   { name: 'Nitrogen Gas', defaultRate: 60  },
 ];
 
+// FICSIT-authentic factory palette — Satisfactory item colors
 export const FACTORY_PALETTE = [
-  '#6366f1', '#0ea5e9', '#10b981', '#f59e0b',
-  '#ef4444', '#a855f7', '#ec4899', '#14b8a6',
+  '#fa9549',   // FICSIT Orange
+  '#5bb0c5',   // FICSIT Blue
+  '#62b944',   // Resource Green
+  '#ca6707',   // Ficsite
+  '#957e4e',   // Caterium
+  '#ae8176',   // Copper
+  '#808182',   // Iron
+  '#d2a736',   // Crystal Oscillator / Gold
 ];
 
 function getCategoryForMachine(machineName: string): string {
@@ -215,8 +279,9 @@ interface PlannerState {
   onNodesChange: OnNodesChange;
   onEdgesChange:  OnEdgesChange;
   onConnect:      OnConnect;
-  addRecipeNode:  (recipeId?: string, position?: { x: number; y: number }) => void;
-  addSourceNode:  (item: string,      position?: { x: number; y: number }) => void;
+  addRecipeNode:          (recipeId?: string, position?: { x: number; y: number }) => void;
+  addSourceNode:          (item: string,      position?: { x: number; y: number }) => void;
+  addSplitterMergerNode:  (position?: { x: number; y: number }) => void;
   addFactoryNode: (memberIds: string[]) => void;
   addToFactory:   (factoryId: string, newMemberIds: string[]) => void;
   updateNodeData: (nodeId: string, patch: Record<string, unknown>) => void;
@@ -275,6 +340,30 @@ export const usePlannerStore = create<PlannerState>((set, get) => ({
   },
 
   onConnect: (connection) => {
+    // ── Validate splitter-merger input connections ──────────────
+    // Only allow connections where the item type matches what's already flowing in
+    if (connection.targetHandle?.includes('-sm-in-')) {
+      const { nodes, edges } = get();
+      const tgtNode = nodes.find(n => n.id === connection.target);
+      if (tgtNode?.type === 'splitterMergerNode') {
+        const smData = tgtNode.data as unknown as SplitterMergerNodeData;
+        const newFlow = deriveFlowFromHandle(connection.source, connection.sourceHandle ?? '', nodes, edges);
+        if (newFlow?.item) {
+          const inCount = smData.inputCount ?? 1;
+          for (let i = 0; i < inCount; i++) {
+            const existing = edges.find(e => e.targetHandle === `${connection.target}-sm-in-${i}`);
+            if (!existing) continue;
+            const existingFlow = deriveFlowFromHandle(existing.source, existing.sourceHandle ?? '', nodes, edges);
+            if (existingFlow?.item && existingFlow.item !== newFlow.item) {
+              // Item mismatch — silently reject the connection
+              return;
+            }
+            break; // only need to check once
+          }
+        }
+      }
+    }
+
     set({ edges: addEdge({ ...connection, animated: false }, get().edges) });
 
     // Scale target node so its input rate matches the source's output rate
@@ -354,6 +443,18 @@ export const usePlannerStore = create<PlannerState>((set, get) => ({
       position,
       dragHandle: DRAG_HANDLE,
       data: { item, ratePerMin: 60 } satisfies SourceNodeData,
+    };
+    set({ nodes: sortNodes([...get().nodes, node]) });
+  },
+
+  addSplitterMergerNode: (position = { x: 200, y: 200 }) => {
+    const id = nextId();
+    const node: Node = {
+      id,
+      type: 'splitterMergerNode',
+      position,
+      dragHandle: DRAG_HANDLE,
+      data: { label: 'Router', inputCount: 1, outputCount: 2, outputRates: [0, 0] } satisfies SplitterMergerNodeData,
     };
     set({ nodes: sortNodes([...get().nodes, node]) });
   },

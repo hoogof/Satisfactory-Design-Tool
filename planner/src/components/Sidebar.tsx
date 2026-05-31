@@ -19,7 +19,8 @@ export function Sidebar() {
   const [query, setQuery] = useState('');
   const [showAlternates, setShowAlternates] = useState(false);
   const [saveName, setSaveName] = useState('');
-  const { addRecipeNode, addSourceNode, addFactoryNode, addToFactory, nodes, edges,
+  const { addRecipeNode, addSourceNode, addFactoryNode, addToFactory,
+          addSplitterMergerNode, nodes, edges,
           savedSlots, saveSlot, loadSlot, deleteSlot } = usePlannerStore();
   const { screenToFlowPosition } = useReactFlow();
 
@@ -105,7 +106,17 @@ export function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar__header">
-        <h2 className="sidebar__title">Satisfactory Planner</h2>
+        <div className="sidebar__brand">
+          {/* Orange circle checkmark icon */}
+          <svg className="sidebar__brand-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="15.5" stroke="#fa9549" strokeWidth="3.5"/>
+            <polyline points="10,18 15.5,24 26,12" stroke="#fa9549" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+          <h2 className="sidebar__title">
+            <span className="sidebar__title-op">Op</span><span className="sidebar__title-tim">tim</span>
+          </h2>
+        </div>
+        <p className="sidebar__subtitle">Satisfactory Factory Planner</p>
       </div>
 
       {/* Quick-add buttons */}
@@ -121,6 +132,13 @@ export function Sidebar() {
           onClick={() => addSourceNode('Iron Ore', spawnPos())}
         >
           + Source
+        </button>
+        <button
+          className="sidebar__btn sidebar__btn--add-router"
+          onClick={() => addSplitterMergerNode(spawnPos())}
+          title="Add a splitter/merger router node"
+        >
+          ⇌ Router
         </button>
       </div>
 

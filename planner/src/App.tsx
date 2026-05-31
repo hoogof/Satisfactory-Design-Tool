@@ -19,15 +19,18 @@ import './App.css';
 import { RecipeNode } from './nodes/RecipeNode';
 import { SourceNode } from './nodes/SourceNode';
 import { FactoryNode } from './nodes/FactoryNode';
+import { SplitterMergerNode } from './nodes/SplitterMergerNode';
 import { DeletableEdge } from './edges/DeletableEdge';
 import { Sidebar } from './components/Sidebar';
+import { QuickSearch } from './components/QuickSearch';
 import { usePlannerStore, recipeMap, getCategoryColor } from './store';
-import type { RecipeNodeData } from './types';
+import type { RecipeNodeData, SplitterMergerNodeData } from './types';
 
 const nodeTypes: NodeTypes = {
-  recipeNode: RecipeNode as never,
-  sourceNode: SourceNode as never,
-  factoryNode: FactoryNode as never,
+  recipeNode:          RecipeNode          as never,
+  sourceNode:          SourceNode          as never,
+  factoryNode:         FactoryNode         as never,
+  splitterMergerNode:  SplitterMergerNode  as never,
 };
 
 const edgeTypes = {
@@ -44,6 +47,30 @@ function useEdgeStyles(nodes: Node[], edges: Edge[]): Edge[] {
 
     if (sourceNode.type === 'sourceNode') {
       color = '#22c55e';
+    } else if (sourceNode.type === 'splitterMergerNode') {
+      const srcData = sourceNode.data as unknown as SplitterMergerNodeData;
+      const outIdx = parseInt(edge.sourceHandle?.match(/sm-out-(\d+)$/)?.[1] ?? 'NaN');
+      if (!isNaN(outIdx)) {
+        const allocated = (srcData.outputRates as number[] | undefined)?.[outIdx] ?? 0;
+        if (allocated <= 0) {
+          color = '#94a3b8'; // grey — nothing allocated
+        } else if (targetNode.type === 'recipeNode') {
+          const tgtData = targetNode.data as unknown as RecipeNodeData;
+          const tgtRecipe = tgtData.recipe ?? recipeMap.get(tgtData.recipeId);
+          const tgtSlug = edge.targetHandle?.match(/-in-(.+)$/)?.[1];
+          if (tgtRecipe && tgtSlug) {
+            const inp = tgtRecipe.inputs.find(
+              i => i.item.toLowerCase().replace(/[\s']/g, '-') === tgtSlug
+            );
+            if (inp) {
+              color = allocated >= inp.ratePerMin * (tgtData.machineCount || 1) - 0.01
+                ? '#22c55e' : '#ef4444';
+            } else { color = '#22c55e'; }
+          } else { color = '#22c55e'; }
+        } else {
+          color = '#22c55e';
+        }
+      }
     } else if (sourceNode.type === 'recipeNode') {
       const srcData = sourceNode.data as unknown as RecipeNodeData;
       const srcRecipe = srcData.recipe ?? recipeMap.get(srcData.recipeId);
@@ -166,7 +193,8 @@ function PlannerCanvas({ dark }: { dark: boolean }) {
 }
 
 export default function App() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark]               = useState(true);
+  const [quickSearch, setQuickSearch] = useState(false);
   const { autoScale, toggleAutoScale } = usePlannerStore();
 
   useEffect(() => {
@@ -174,8 +202,20 @@ export default function App() {
   }, [dark]);
 
   useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => { if (e.key === 'Shift') document.body.classList.add('shift-held'); };
-    const onKeyUp   = (e: KeyboardEvent) => { if (e.key === 'Shift') document.body.classList.remove('shift-held'); };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Shift') document.body.classList.add('shift-held');
+
+      // Press N to open quick-search (skip when typing in an input / textarea)
+      if (e.key === 'n' || e.key === 'N') {
+        const tag = (e.target as HTMLElement).tagName;
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target as HTMLElement).isContentEditable) return;
+        e.preventDefault();
+        setQuickSearch(true);
+      }
+    };
+    const onKeyUp = (e: KeyboardEvent) => {
+      if (e.key === 'Shift') document.body.classList.remove('shift-held');
+    };
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('keyup',   onKeyUp);
     return () => {
@@ -202,9 +242,17 @@ export default function App() {
           >
             {dark ? '☀ Light' : '◑ Dark'}
           </button>
+          <button
+            className="toolbar__btn"
+            onClick={() => setQuickSearch(true)}
+            title="Quick-search recipes (N)"
+          >
+            ⌕ Search recipes <kbd>N</kbd>
+          </button>
         </div>
         <Sidebar />
         <PlannerCanvas dark={dark} />
+        {quickSearch && <QuickSearch onClose={() => setQuickSearch(false)} />}
       </div>
     </ReactFlowProvider>
   );

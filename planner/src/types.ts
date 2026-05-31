@@ -44,3 +44,10 @@ export interface FactoryNodeData extends Record<string, unknown> {
   label: string;
   color: string;
 }
+
+export interface SplitterMergerNodeData extends Record<string, unknown> {
+  label: string;
+  inputCount: number;
+  outputCount: number;
+  outputRates: number[];   // allocated /min for each output slot
+}

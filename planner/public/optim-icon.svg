@@ -1,12 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- Bar chart favicon — ascending bars, orange accent on tallest -->
-
   <!-- Bar 1 — short, muted -->
   <rect x="6"  y="40" width="13" height="18" rx="2.5" fill="#6b6560"/>
-
   <!-- Bar 2 — medium -->
   <rect x="25" y="28" width="14" height="30" rx="2.5" fill="#9a9188"/>
-
-  <!-- Bar 3 — tall, FICSIT orange accent -->
+  <!-- Bar 3 — tall, orange accent -->
   <rect x="45" y="12" width="13" height="46" rx="2.5" fill="#fa9549"/>
 </svg>
