@@ -1725,3 +1725,245 @@ body.shift-held .react-flow__edge { pointer-events: none; }
   color: var(--blue-rate);
   font-size: 10px;
 }
+
+/* ── Conservation check (post-autoscale LHS=RHS validation) ──── */
+.node--conservation-error {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(224, 92, 74, 0.18) !important;
+  border-radius: 4px;
+}
+
+.conservation-toast {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  z-index: 1000;
+  max-width: 380px;
+  background: var(--bg-panel);
+  border: 1px solid var(--red);
+  border-left: 4px solid var(--red);
+  border-radius: 6px;
+  box-shadow: var(--shadow-md);
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.conservation-toast__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+
+.conservation-toast__close {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 4px;
+}
+.conservation-toast__close:hover { color: var(--red); }
+
+.conservation-toast__list {
+  margin: 0;
+  padding-left: 16px;
+  max-height: 160px;
+  overflow-y: auto;
+}
+.conservation-toast__list li { margin-bottom: 3px; }
+
+/* ── Item / machine icons (scraped by icon_scraper.py) ───────── */
+.item-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  flex: 0 0 auto;
+  vertical-align: middle;
+  margin-right: 6px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.recipe-node__top-row .item-icon { width: 16px; height: 16px; margin-right: 2px; }
+
+.sm-node__locked-item .item-icon { vertical-align: -4px; margin-right: 3px; }
+
+.source-node__resource-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.source-node__resource-row .item-icon { margin-right: 0; }
+.source-node__resource-row .source-node__resource-select { flex: 1; min-width: 0; }
+
+/* ── Sheet tabs (multi-factory sheets) ───────────────────────── */
+.sheet-tabs {
+  position: fixed;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: var(--shadow-md);
+  max-width: 60vw;
+  overflow-x: auto;
+}
+
+.sheet-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  border: 1px solid transparent;
+}
+.sheet-tab:hover { color: var(--text-primary); background: var(--bg-panel-alt); }
+
+.sheet-tab--active {
+  color: var(--text-primary);
+  background: var(--bg-panel-alt);
+  border-color: var(--border);
+}
+
+.sheet-tab__rename {
+  width: 90px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--bg-panel);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 4px;
+}
+
+.sheet-tab__close {
+  background: none;
+  border: none;
+  padding: 0 2px;
+  font-size: 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+  line-height: 1;
+}
+.sheet-tab__close:hover { color: var(--red); }
+
+.sheet-tabs__add {
+  background: none;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  color: var(--text-muted);
+  font-size: 13px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+.sheet-tabs__add:hover { color: var(--text-primary); border-color: var(--text-muted); }
+
+/* ── Sink button + node (terminal consumer) ──────────────────── */
+.sidebar__btn--add-sink {
+  background: rgba(200,64,48,0.10);
+  border-color: rgba(200,64,48,0.35);
+  border-bottom-color: rgba(200,64,48,0.6);
+  color: var(--red);
+}
+.sidebar__btn--add-sink:hover {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+}
+
+.sink-node {
+  background: var(--bg-panel);
+  border: 1px solid rgba(200,64,48,0.30);
+  border-right: 3px solid var(--red);
+  border-radius: 6px;
+  min-width: 170px;
+  font-size: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.15s;
+  position: relative;
+}
+.sink-node:hover { box-shadow: var(--shadow-md); }
+.sink-node--selected {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(224,92,74,0.20), var(--shadow-md);
+}
+
+.sink-node__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(200,64,48,0.08);
+  border-radius: 4px 4px 0 0;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.sink-node__icon { font-size: 11px; }
+.sink-node__header-label { flex: 1; }
+
+.sink-node__body {
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sink-node__empty {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.sink-node__row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+.sink-node__item {
+  flex: 1;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sink-node__rate {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+}
+
+.sink-node__total {
+  margin-top: 2px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border-light);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--red);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}

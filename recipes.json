@@ -34,7 +34,8 @@
         "ratePerMin": 100.0
       }
     ],
-    "unlockMethod": "Tier 9 - Quantum Encoding"
+    "unlockMethod": "Tier 9 - Quantum Encoding",
+    "icon": "icons/ai-expansion-server.png"
   },
   {
     "id": "ai-limiter",
@@ -60,7 +61,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM Caterium Research - AI Limiter OR Tier 7 - Control System Development"
+    "unlockMethod": "MAM Caterium Research - AI Limiter OR Tier 7 - Control System Development",
+    "icon": "icons/ai-limiter.png"
   },
   {
     "id": "adaptive-control-unit",
@@ -93,7 +95,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "Tier 6 - Industrial Manufacturing"
+    "unlockMethod": "Tier 6 - Industrial Manufacturing",
+    "icon": "icons/adaptive-control-unit.png"
   },
   {
     "id": "alclad-aluminum-sheet",
@@ -119,7 +122,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Tier 7 - Bauxite Refinement",
+    "icon": "icons/alclad-aluminum-sheet.png"
   },
   {
     "id": "alien-dna-capsule",
@@ -141,7 +145,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "MAM Alien Megafauna Research - Bio-Organic Properties"
+    "unlockMethod": "MAM Alien Megafauna Research - Bio-Organic Properties",
+    "icon": "icons/alien-dna-capsule.png"
   },
   {
     "id": "alien-power-matrix",
@@ -178,7 +183,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "MAM Alien Technology Research - Alien Power Matrix"
+    "unlockMethod": "MAM Alien Technology Research - Alien Power Matrix",
+    "icon": "icons/alien-power-matrix.png"
   },
   {
     "id": "alumina-solution",
@@ -207,7 +213,8 @@
         "ratePerMin": 50.0
       }
     ],
-    "unlockMethod": "Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Tier 7 - Bauxite Refinement",
+    "icon": "icons/alumina-solution.png"
   },
   {
     "id": "aluminum-casing",
@@ -229,7 +236,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Tier 7 - Bauxite Refinement",
+    "icon": "icons/aluminum-casing.png"
   },
   {
     "id": "aluminum-ingot",
@@ -255,7 +263,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Tier 7 - Bauxite Refinement",
+    "icon": "icons/aluminum-ingot.png"
   },
   {
     "id": "aluminum-scrap",
@@ -284,7 +293,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Tier 7 - Bauxite Refinement",
+    "icon": "icons/aluminum-scrap.png"
   },
   {
     "id": "assembly-director-system",
@@ -309,7 +319,8 @@
         "ratePerMin": 0.75
       }
     ],
-    "unlockMethod": "Tier 7 - Control System Development"
+    "unlockMethod": "Tier 7 - Control System Development",
+    "icon": "icons/assembly-director-system.png"
   },
   {
     "id": "automated-wiring",
@@ -334,7 +345,8 @@
         "ratePerMin": 2.5
       }
     ],
-    "unlockMethod": "Tier 4 - Advanced Steel Production"
+    "unlockMethod": "Tier 4 - Advanced Steel Production",
+    "icon": "icons/automated-wiring.png"
   },
   {
     "id": "ballistic-warp-drive",
@@ -367,7 +379,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "Tier 9 - Spatial Energy Regulation"
+    "unlockMethod": "Tier 9 - Spatial Energy Regulation",
+    "icon": "icons/ballistic-warp-drive.png"
   },
   {
     "id": "battery",
@@ -400,7 +413,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 7 - Control System Development"
+    "unlockMethod": "Tier 7 - Control System Development",
+    "icon": "icons/battery.png"
   },
   {
     "id": "bauxite-caterium",
@@ -425,7 +439,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/bauxite.png"
   },
   {
     "id": "bauxite-copper",
@@ -450,7 +465,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/bauxite.png"
   },
   {
     "id": "biochemical-sculptor",
@@ -479,7 +495,8 @@
         "ratePerMin": 2.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/biochemical-sculptor.png"
   },
   {
     "id": "biocoal",
@@ -500,7 +517,8 @@
         "ratePerMin": 45.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Compacted Coal OR Tier 3 - Coal Power"
+    "unlockMethod": "MAM Sulfur Research - Compacted Coal OR Tier 3 - Coal Power",
+    "icon": "icons/coal.png"
   },
   {
     "id": "biomass-alien-protein",
@@ -522,7 +540,8 @@
         "ratePerMin": 1500.0
       }
     ],
-    "unlockMethod": "MAM Alien Megafauna Research - Bio-Organic Properties"
+    "unlockMethod": "MAM Alien Megafauna Research - Bio-Organic Properties",
+    "icon": "icons/biomass.png"
   },
   {
     "id": "biomass-leaves",
@@ -544,7 +563,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 0 - HUB Upgrade 6"
+    "unlockMethod": "Tier 0 - HUB Upgrade 6",
+    "icon": "icons/biomass.png"
   },
   {
     "id": "biomass-mycelia",
@@ -566,7 +586,8 @@
         "ratePerMin": 150.0
       }
     ],
-    "unlockMethod": "MAM Mycelia Research - Mycelia"
+    "unlockMethod": "MAM Mycelia Research - Mycelia",
+    "icon": "icons/biomass.png"
   },
   {
     "id": "biomass-wood",
@@ -588,7 +609,8 @@
         "ratePerMin": 300.0
       }
     ],
-    "unlockMethod": "Tier 0 - HUB Upgrade 6"
+    "unlockMethod": "Tier 0 - HUB Upgrade 6",
+    "icon": "icons/biomass.png"
   },
   {
     "id": "black-powder",
@@ -614,7 +636,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Black Powder"
+    "unlockMethod": "MAM Sulfur Research - Black Powder",
+    "icon": "icons/black-powder.png"
   },
   {
     "id": "blade-runners",
@@ -643,7 +666,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "MAM Quartz Research - Blade Runners"
+    "unlockMethod": "MAM Quartz Research - Blade Runners",
+    "icon": "icons/blade-runners.png"
   },
   {
     "id": "blue-ficsmas-ornament-ficsmas",
@@ -664,7 +688,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 1"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 1",
+    "icon": "icons/blue-ficsmas-ornament.png"
   },
   {
     "id": "cable",
@@ -686,7 +711,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 0 - HUB Upgrade 2"
+    "unlockMethod": "Tier 0 - HUB Upgrade 2",
+    "icon": "icons/cable.png"
   },
   {
     "id": "candy-cane-ficsmas",
@@ -707,7 +733,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - Candy Cane Basher"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - Candy Cane Basher",
+    "icon": "icons/candy-cane.png"
   },
   {
     "id": "candy-cane-basher-ficsmas",
@@ -736,7 +763,8 @@
         "ratePerMin": 0.75
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - Candy Cane Basher"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - Candy Cane Basher",
+    "icon": "icons/candy-cane-basher.png"
   },
   {
     "id": "caterium-ingot",
@@ -758,7 +786,8 @@
         "ratePerMin": 15.0
       }
     ],
-    "unlockMethod": "MAM Caterium Research - Caterium Ingots OR Tier 5 - Petroleum Power"
+    "unlockMethod": "MAM Caterium Research - Caterium Ingots OR Tier 5 - Petroleum Power",
+    "icon": "icons/caterium-ingot.png"
   },
   {
     "id": "caterium-ore-copper",
@@ -783,7 +812,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/caterium-ore.png"
   },
   {
     "id": "caterium-ore-quartz",
@@ -808,7 +838,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/caterium-ore.png"
   },
   {
     "id": "chainsaw",
@@ -841,7 +872,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "Tier 2 - Obstacle Clearing"
+    "unlockMethod": "Tier 2 - Obstacle Clearing",
+    "icon": "icons/chainsaw.png"
   },
   {
     "id": "charcoal",
@@ -862,7 +894,8 @@
         "ratePerMin": 150.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Compacted Coal OR Tier 3 - Coal Power"
+    "unlockMethod": "MAM Sulfur Research - Compacted Coal OR Tier 3 - Coal Power",
+    "icon": "icons/coal.png"
   },
   {
     "id": "circuit-board",
@@ -888,7 +921,8 @@
         "ratePerMin": 7.5
       }
     ],
-    "unlockMethod": "Tier 5 - Oil Processing"
+    "unlockMethod": "Tier 5 - Oil Processing",
+    "icon": "icons/circuit-board.png"
   },
   {
     "id": "cluster-nobelisk",
@@ -914,7 +948,8 @@
         "ratePerMin": 2.5
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Cluster Nobelisk"
+    "unlockMethod": "MAM Sulfur Research - Cluster Nobelisk",
+    "icon": "icons/cluster-nobelisk.png"
   },
   {
     "id": "coal-iron",
@@ -939,7 +974,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/coal.png"
   },
   {
     "id": "coal-limestone",
@@ -964,7 +1000,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/coal.png"
   },
   {
     "id": "compacted-coal",
@@ -989,7 +1026,8 @@
         "ratePerMin": 25.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Compacted Coal"
+    "unlockMethod": "MAM Sulfur Research - Compacted Coal",
+    "icon": "icons/compacted-coal.png"
   },
   {
     "id": "computer",
@@ -1019,7 +1057,8 @@
         "ratePerMin": 2.5
       }
     ],
-    "unlockMethod": "Tier 6 - Industrial Manufacturing"
+    "unlockMethod": "Tier 6 - Industrial Manufacturing",
+    "icon": "icons/computer.png"
   },
   {
     "id": "concrete",
@@ -1041,7 +1080,8 @@
         "ratePerMin": 15.0
       }
     ],
-    "unlockMethod": "Tier 0 - HUB Upgrade 3"
+    "unlockMethod": "Tier 0 - HUB Upgrade 3",
+    "icon": "icons/concrete.png"
   },
   {
     "id": "cooling-system",
@@ -1074,7 +1114,8 @@
         "ratePerMin": 6.0
       }
     ],
-    "unlockMethod": "Tier 8 - Advanced Aluminum Production"
+    "unlockMethod": "Tier 8 - Advanced Aluminum Production",
+    "icon": "icons/cooling-system.png"
   },
   {
     "id": "copper-ficsmas-ornament-ficsmas",
@@ -1099,7 +1140,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 2"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 2",
+    "icon": "icons/copper-ficsmas-ornament.png"
   },
   {
     "id": "copper-ingot",
@@ -1121,7 +1163,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 0 - HUB Upgrade 2"
+    "unlockMethod": "Tier 0 - HUB Upgrade 2",
+    "icon": "icons/copper-ingot.png"
   },
   {
     "id": "copper-ore-quartz",
@@ -1146,7 +1189,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/copper-ore.png"
   },
   {
     "id": "copper-ore-sulfur",
@@ -1171,7 +1215,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/copper-ore.png"
   },
   {
     "id": "copper-powder",
@@ -1193,7 +1238,8 @@
         "ratePerMin": 50.0
       }
     ],
-    "unlockMethod": "Tier 8 - Particle Enrichment"
+    "unlockMethod": "Tier 8 - Particle Enrichment",
+    "icon": "icons/copper-powder.png"
   },
   {
     "id": "copper-sheet",
@@ -1215,7 +1261,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "Tier 2 - Part Assembly"
+    "unlockMethod": "Tier 2 - Part Assembly",
+    "icon": "icons/copper-sheet.png"
   },
   {
     "id": "crystal-oscillator",
@@ -1245,7 +1292,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "MAM Quartz Research - Crystal Oscillator OR Tier 7 - Bauxite Refinement"
+    "unlockMethod": "MAM Quartz Research - Crystal Oscillator OR Tier 7 - Bauxite Refinement",
+    "icon": "icons/crystal-oscillator.png"
   },
   {
     "id": "dark-matter-crystal",
@@ -1270,7 +1318,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 9 - Quantum Encoding"
+    "unlockMethod": "Tier 9 - Quantum Encoding",
+    "icon": "icons/dark-matter-crystal.png"
   },
   {
     "id": "dark-matter-residue",
@@ -1291,7 +1340,8 @@
         "ratePerMin": 100.0
       }
     ],
-    "unlockMethod": "Tier 9 - Quantum Encoding"
+    "unlockMethod": "Tier 9 - Quantum Encoding",
+    "icon": "icons/dark-matter-residue.png"
   },
   {
     "id": "diamonds",
@@ -1312,7 +1362,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/diamonds.png"
   },
   {
     "id": "electromagnetic-control-rod",
@@ -1338,7 +1389,8 @@
         "ratePerMin": 4.0
       }
     ],
-    "unlockMethod": "Tier 8 - Nuclear Power"
+    "unlockMethod": "Tier 8 - Nuclear Power",
+    "icon": "icons/electromagnetic-control-rod.png"
   },
   {
     "id": "empty-canister",
@@ -1360,7 +1412,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 5 - Fluid Packaging"
+    "unlockMethod": "Tier 5 - Fluid Packaging",
+    "icon": "icons/empty-canister.png"
   },
   {
     "id": "empty-fluid-tank",
@@ -1382,7 +1435,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 8 - Advanced Aluminum Production"
+    "unlockMethod": "Tier 8 - Advanced Aluminum Production",
+    "icon": "icons/empty-fluid-tank.png"
   },
   {
     "id": "encased-industrial-beam",
@@ -1408,7 +1462,8 @@
         "ratePerMin": 6.0
       }
     ],
-    "unlockMethod": "Tier 4 - Advanced Steel Production"
+    "unlockMethod": "Tier 4 - Advanced Steel Production",
+    "icon": "icons/encased-industrial-beam.png"
   },
   {
     "id": "encased-plutonium-cell",
@@ -1434,7 +1489,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "Tier 8 - Particle Enrichment"
+    "unlockMethod": "Tier 8 - Particle Enrichment",
+    "icon": "icons/encased-plutonium-cell.png"
   },
   {
     "id": "encased-uranium-cell",
@@ -1467,7 +1523,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "Tier 8 - Nuclear Power"
+    "unlockMethod": "Tier 8 - Nuclear Power",
+    "icon": "icons/encased-uranium-cell.png"
   },
   {
     "id": "excited-photonic-matter",
@@ -1483,7 +1540,8 @@
         "ratePerMin": 200.0
       }
     ],
-    "unlockMethod": "Tier 9 - Quantum Encoding"
+    "unlockMethod": "Tier 9 - Quantum Encoding",
+    "icon": "icons/excited-photonic-matter.png"
   },
   {
     "id": "explosive-rebar",
@@ -1513,7 +1571,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Explosive Rebar"
+    "unlockMethod": "MAM Sulfur Research - Explosive Rebar",
+    "icon": "icons/explosive-rebar.png"
   },
   {
     "id": "ficsmas-actual-snow-ficsmas",
@@ -1534,7 +1593,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - A Friend"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - A Friend",
+    "icon": "icons/ficsmas-actual-snow.png"
   },
   {
     "id": "ficsmas-bow-ficsmas",
@@ -1555,7 +1615,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - Candy Cane Decor"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - Candy Cane Decor",
+    "icon": "icons/ficsmas-bow.png"
   },
   {
     "id": "ficsmas-data-cartridge-day-1-experimental-ficsmas",
@@ -1576,7 +1637,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - FICSMAS Tree Base"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - FICSMAS Tree Base",
+    "icon": "icons/ficsmas-data-cartridge-day-1.png"
   },
   {
     "id": "ficsmas-data-cartridge-day-14-experimental-ficsmas",
@@ -1597,7 +1659,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 3"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 3",
+    "icon": "icons/ficsmas-data-cartridge-day-14.png"
   },
   {
     "id": "ficsmas-data-cartridge-day-4-experimental-ficsmas",
@@ -1618,7 +1681,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 1"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 1",
+    "icon": "icons/ficsmas-data-cartridge-day-4.png"
   },
   {
     "id": "ficsmas-data-cartridge-day-8-experimental-ficsmas",
@@ -1639,7 +1703,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 2"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 2",
+    "icon": "icons/ficsmas-data-cartridge-day-8.png"
   },
   {
     "id": "ficsmas-ornament-bundle-ficsmas",
@@ -1664,7 +1729,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - FICSMAS Lights"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - FICSMAS Lights",
+    "icon": "icons/ficsmas-ornament-bundle.png"
   },
   {
     "id": "ficsmas-tree-branch-ficsmas",
@@ -1685,7 +1751,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - FICSMAS Tree Base"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - FICSMAS Tree Base",
+    "icon": "icons/ficsmas-tree-branch.png"
   },
   {
     "id": "ficsmas-wonder-star-ficsmas",
@@ -1710,7 +1777,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - FICSMAS Decoration"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - FICSMAS Decoration",
+    "icon": "icons/ficsmas-wonder-star.png"
   },
   {
     "id": "ficsmas-wreath-ficsmas",
@@ -1735,7 +1803,8 @@
         "ratePerMin": 2.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 3"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 3",
+    "icon": "icons/ficsmas-wreath.png"
   },
   {
     "id": "fabric",
@@ -1761,7 +1830,8 @@
         "ratePerMin": 15.0
       }
     ],
-    "unlockMethod": "MAM Mycelia Research - Fabric"
+    "unlockMethod": "MAM Mycelia Research - Fabric",
+    "icon": "icons/fabric.png"
   },
   {
     "id": "factory-cart",
@@ -1790,7 +1860,8 @@
         "ratePerMin": 3.0
       }
     ],
-    "unlockMethod": "AWESOME Shop - FICSIT Factory Cart™"
+    "unlockMethod": "AWESOME Shop - FICSIT Factory Cart™",
+    "icon": "icons/factory-cart.png"
   },
   {
     "id": "fancy-fireworks",
@@ -1816,7 +1887,8 @@
         "ratePerMin": 2.5
       }
     ],
-    "unlockMethod": "Equipment: Fireworks"
+    "unlockMethod": "Equipment: Fireworks",
+    "icon": "icons/fancy-fireworks.png"
   },
   {
     "id": "ficsite-ingot-aluminum",
@@ -1841,7 +1913,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/ficsite-ingot.png"
   },
   {
     "id": "ficsite-ingot-caterium",
@@ -1866,7 +1939,8 @@
         "ratePerMin": 15.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/ficsite-ingot.png"
   },
   {
     "id": "ficsite-ingot-iron",
@@ -1891,7 +1965,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/ficsite-ingot.png"
   },
   {
     "id": "ficsite-trigon",
@@ -1913,7 +1988,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/ficsite-trigon.png"
   },
   {
     "id": "ficsonium",
@@ -1942,7 +2018,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "Tier 9 - Peak Efficiency"
+    "unlockMethod": "Tier 9 - Peak Efficiency",
+    "icon": "icons/ficsonium.png"
   },
   {
     "id": "ficsonium-fuel-rod",
@@ -1979,7 +2056,8 @@
         "ratePerMin": 50.0
       }
     ],
-    "unlockMethod": "Tier 9 - Peak Efficiency"
+    "unlockMethod": "Tier 9 - Peak Efficiency",
+    "icon": "icons/ficsonium-fuel-rod.png"
   },
   {
     "id": "fuel",
@@ -2004,7 +2082,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 5 - Oil Processing"
+    "unlockMethod": "Tier 5 - Oil Processing",
+    "icon": "icons/fuel.png"
   },
   {
     "id": "fused-modular-frame",
@@ -2033,7 +2112,8 @@
         "ratePerMin": 1.5
       }
     ],
-    "unlockMethod": "Tier 8 - Advanced Aluminum Production"
+    "unlockMethod": "Tier 8 - Advanced Aluminum Production",
+    "icon": "icons/fused-modular-frame.png"
   },
   {
     "id": "gas-filter",
@@ -2063,7 +2143,8 @@
         "ratePerMin": 7.5
       }
     ],
-    "unlockMethod": "MAM Mycelia Research - Gas Mask"
+    "unlockMethod": "MAM Mycelia Research - Gas Mask",
+    "icon": "icons/gas-filter.png"
   },
   {
     "id": "gas-mask",
@@ -2092,7 +2173,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "MAM Mycelia Research - Gas Mask"
+    "unlockMethod": "MAM Mycelia Research - Gas Mask",
+    "icon": "icons/gas-mask.png"
   },
   {
     "id": "gas-nobelisk",
@@ -2118,7 +2200,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM Mycelia Research - Toxic Cellular Modification"
+    "unlockMethod": "MAM Mycelia Research - Toxic Cellular Modification",
+    "icon": "icons/gas-nobelisk.png"
   },
   {
     "id": "golden-factory-cart",
@@ -2147,7 +2230,8 @@
         "ratePerMin": 3.0
       }
     ],
-    "unlockMethod": "AWESOME Shop - Golden FICSIT Factory Cart™"
+    "unlockMethod": "AWESOME Shop - Golden FICSIT Factory Cart™",
+    "icon": "icons/golden-factory-cart.png"
   },
   {
     "id": "hatcher-protein",
@@ -2169,7 +2253,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "MAM Alien Megafauna Research - Hatcher Research"
+    "unlockMethod": "MAM Alien Megafauna Research - Hatcher Research",
+    "icon": "icons/alien-protein.png"
   },
   {
     "id": "hazmat-suit",
@@ -2202,7 +2287,8 @@
         "ratePerMin": 0.5
       }
     ],
-    "unlockMethod": "Tier 7 - Hazmat Suit"
+    "unlockMethod": "Tier 7 - Hazmat Suit",
+    "icon": "icons/hazmat-suit.png"
   },
   {
     "id": "heat-sink",
@@ -2228,7 +2314,8 @@
         "ratePerMin": 7.5
       }
     ],
-    "unlockMethod": "Tier 8 - Advanced Aluminum Production"
+    "unlockMethod": "Tier 8 - Advanced Aluminum Production",
+    "icon": "icons/heat-sink.png"
   },
   {
     "id": "heavy-modular-frame",
@@ -2262,7 +2349,8 @@
         "ratePerMin": 2.0
       }
     ],
-    "unlockMethod": "Tier 6 - Industrial Manufacturing"
+    "unlockMethod": "Tier 6 - Industrial Manufacturing",
+    "icon": "icons/heavy-modular-frame.png"
   },
   {
     "id": "high-speed-connector",
@@ -2292,7 +2380,8 @@
         "ratePerMin": 3.75
       }
     ],
-    "unlockMethod": "MAM Caterium Research - High-Speed Connector OR Tier 7 - Control System Development"
+    "unlockMethod": "MAM Caterium Research - High-Speed Connector OR Tier 7 - Control System Development",
+    "icon": "icons/high-speed-connector.png"
   },
   {
     "id": "hog-protein",
@@ -2314,7 +2403,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "MAM Alien Megafauna Research - Hog Research"
+    "unlockMethod": "MAM Alien Megafauna Research - Hog Research",
+    "icon": "icons/alien-protein.png"
   },
   {
     "id": "homing-rifle-ammo",
@@ -2340,7 +2430,8 @@
         "ratePerMin": 25.0
       }
     ],
-    "unlockMethod": "MAM Caterium Research - Bullet Guidance System"
+    "unlockMethod": "MAM Caterium Research - Bullet Guidance System",
+    "icon": "icons/homing-rifle-ammo.png"
   },
   {
     "id": "hoverpack",
@@ -2373,7 +2464,8 @@
         "ratePerMin": 0.5
       }
     ],
-    "unlockMethod": "Tier 7 - Hoverpack"
+    "unlockMethod": "Tier 7 - Hoverpack",
+    "icon": "icons/hoverpack.png"
   },
   {
     "id": "iodine-infused-filter",
@@ -2403,7 +2495,8 @@
         "ratePerMin": 3.75
       }
     ],
-    "unlockMethod": "Tier 7 - Hazmat Suit"
+    "unlockMethod": "Tier 7 - Hazmat Suit",
+    "icon": "icons/iodine-infused-filter.png"
   },
   {
     "id": "ionized-fuel",
@@ -2432,7 +2525,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Ionized Fuel"
+    "unlockMethod": "MAM Sulfur Research - Ionized Fuel",
+    "icon": "icons/ionized-fuel.png"
   },
   {
     "id": "iron-ficsmas-ornament-ficsmas",
@@ -2457,7 +2551,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 2"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 2",
+    "icon": "icons/iron-ficsmas-ornament.png"
   },
   {
     "id": "iron-ingot",
@@ -2479,7 +2574,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Onboarding"
+    "unlockMethod": "Onboarding",
+    "icon": "icons/iron-ingot.png"
   },
   {
     "id": "iron-ore-limestone",
@@ -2504,7 +2600,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/iron-ore.png"
   },
   {
     "id": "iron-plate",
@@ -2526,7 +2623,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "Onboarding"
+    "unlockMethod": "Onboarding",
+    "icon": "icons/iron-plate.png"
   },
   {
     "id": "iron-rebar",
@@ -2548,7 +2646,8 @@
         "ratePerMin": 15.0
       }
     ],
-    "unlockMethod": "MAM Alien Megafauna Research - The Rebar Gun"
+    "unlockMethod": "MAM Alien Megafauna Research - The Rebar Gun",
+    "icon": "icons/iron-rebar.png"
   },
   {
     "id": "iron-rod",
@@ -2570,7 +2669,8 @@
         "ratePerMin": 15.0
       }
     ],
-    "unlockMethod": "Onboarding"
+    "unlockMethod": "Onboarding",
+    "icon": "icons/iron-rod.png"
   },
   {
     "id": "jetpack",
@@ -2603,7 +2703,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "Tier 5 - Jetpack"
+    "unlockMethod": "Tier 5 - Jetpack",
+    "icon": "icons/jetpack.png"
   },
   {
     "id": "limestone-sulfur",
@@ -2628,7 +2729,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/limestone.png"
   },
   {
     "id": "liquid-biofuel",
@@ -2653,7 +2755,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 5 - Fluid Packaging"
+    "unlockMethod": "Tier 5 - Fluid Packaging",
+    "icon": "icons/liquid-biofuel.png"
   },
   {
     "id": "magnetic-field-generator",
@@ -2678,7 +2781,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "Tier 8 - Nuclear Power"
+    "unlockMethod": "Tier 8 - Nuclear Power",
+    "icon": "icons/magnetic-field-generator.png"
   },
   {
     "id": "modular-engine",
@@ -2707,7 +2811,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "Tier 6 - Industrial Manufacturing"
+    "unlockMethod": "Tier 6 - Industrial Manufacturing",
+    "icon": "icons/modular-engine.png"
   },
   {
     "id": "modular-frame",
@@ -2733,7 +2838,8 @@
         "ratePerMin": 2.0
       }
     ],
-    "unlockMethod": "Tier 2 - Part Assembly"
+    "unlockMethod": "Tier 2 - Part Assembly",
+    "icon": "icons/modular-frame.png"
   },
   {
     "id": "motor",
@@ -2759,7 +2865,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "Tier 4 - Advanced Steel Production"
+    "unlockMethod": "Tier 4 - Advanced Steel Production",
+    "icon": "icons/motor.png"
   },
   {
     "id": "neural-quantum-processor",
@@ -2796,7 +2903,8 @@
         "ratePerMin": 75.0
       }
     ],
-    "unlockMethod": "Tier 9 - Quantum Encoding"
+    "unlockMethod": "Tier 9 - Quantum Encoding",
+    "icon": "icons/neural-quantum-processor.png"
   },
   {
     "id": "nitric-acid",
@@ -2825,7 +2933,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 8 - Particle Enrichment"
+    "unlockMethod": "Tier 8 - Particle Enrichment",
+    "icon": "icons/nitric-acid.png"
   },
   {
     "id": "nitrogen-gas-bauxite",
@@ -2850,7 +2959,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/nitrogen-gas.png"
   },
   {
     "id": "nitrogen-gas-caterium",
@@ -2875,7 +2985,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/nitrogen-gas.png"
   },
   {
     "id": "nobelisk",
@@ -2901,7 +3012,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - The Nobelisk Detonator"
+    "unlockMethod": "MAM Sulfur Research - The Nobelisk Detonator",
+    "icon": "icons/nobelisk.png"
   },
   {
     "id": "nobelisk-detonator",
@@ -2930,7 +3042,8 @@
         "ratePerMin": 0.75
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - The Nobelisk Detonator"
+    "unlockMethod": "MAM Sulfur Research - The Nobelisk Detonator",
+    "icon": "icons/nobelisk-detonator.png"
   },
   {
     "id": "non-fissile-uranium",
@@ -2967,7 +3080,8 @@
         "ratePerMin": 15.0
       }
     ],
-    "unlockMethod": "Tier 8 - Particle Enrichment"
+    "unlockMethod": "Tier 8 - Particle Enrichment",
+    "icon": "icons/non-fissile-uranium.png"
   },
   {
     "id": "nuclear-pasta",
@@ -2992,7 +3106,8 @@
         "ratePerMin": 0.5
       }
     ],
-    "unlockMethod": "Tier 8 - Particle Enrichment"
+    "unlockMethod": "Tier 8 - Particle Enrichment",
+    "icon": "icons/nuclear-pasta.png"
   },
   {
     "id": "nuke-nobelisk",
@@ -3026,7 +3141,8 @@
         "ratePerMin": 0.5
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Nuclear Deterrent Development"
+    "unlockMethod": "MAM Sulfur Research - Nuclear Deterrent Development",
+    "icon": "icons/nuke-nobelisk.png"
   },
   {
     "id": "nutritional-inhaler",
@@ -3055,7 +3171,8 @@
         "ratePerMin": 3.0
       }
     ],
-    "unlockMethod": "MAM Nutrients Research - Nutritional Inhaler"
+    "unlockMethod": "MAM Nutrients Research - Nutritional Inhaler",
+    "icon": "icons/medicinal-inhaler.png"
   },
   {
     "id": "object-scanner",
@@ -3084,7 +3201,8 @@
         "ratePerMin": 1.5
       }
     ],
-    "unlockMethod": "Tier 1 - Field Research"
+    "unlockMethod": "Tier 1 - Field Research",
+    "icon": "icons/object-scanner.png"
   },
   {
     "id": "packaged-alumina-solution",
@@ -3109,7 +3227,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Tier 7 - Bauxite Refinement",
+    "icon": "icons/packaged-alumina-solution.png"
   },
   {
     "id": "packaged-fuel",
@@ -3134,7 +3253,8 @@
         "ratePerMin": 40.0
       }
     ],
-    "unlockMethod": "Tier 5 - Fluid Packaging"
+    "unlockMethod": "Tier 5 - Fluid Packaging",
+    "icon": "icons/packaged-fuel.png"
   },
   {
     "id": "packaged-heavy-oil-residue",
@@ -3159,7 +3279,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 5 - Fluid Packaging"
+    "unlockMethod": "Tier 5 - Fluid Packaging",
+    "icon": "icons/packaged-heavy-oil-residue.png"
   },
   {
     "id": "packaged-ionized-fuel",
@@ -3184,7 +3305,8 @@
         "ratePerMin": 40.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Ionized Fuel"
+    "unlockMethod": "MAM Sulfur Research - Ionized Fuel",
+    "icon": "icons/packaged-ionized-fuel.png"
   },
   {
     "id": "packaged-liquid-biofuel",
@@ -3209,7 +3331,8 @@
         "ratePerMin": 40.0
       }
     ],
-    "unlockMethod": "Tier 5 - Fluid Packaging"
+    "unlockMethod": "Tier 5 - Fluid Packaging",
+    "icon": "icons/packaged-liquid-biofuel.png"
   },
   {
     "id": "packaged-nitric-acid",
@@ -3234,7 +3357,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 8 - Particle Enrichment"
+    "unlockMethod": "Tier 8 - Particle Enrichment",
+    "icon": "icons/packaged-nitric-acid.png"
   },
   {
     "id": "packaged-nitrogen-gas",
@@ -3259,7 +3383,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 8 - Advanced Aluminum Production"
+    "unlockMethod": "Tier 8 - Advanced Aluminum Production",
+    "icon": "icons/packaged-nitrogen-gas.png"
   },
   {
     "id": "packaged-oil",
@@ -3284,7 +3409,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 5 - Fluid Packaging"
+    "unlockMethod": "Tier 5 - Fluid Packaging",
+    "icon": "icons/packaged-oil.png"
   },
   {
     "id": "packaged-rocket-fuel",
@@ -3309,7 +3435,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Rocket Fuel"
+    "unlockMethod": "MAM Sulfur Research - Rocket Fuel",
+    "icon": "icons/packaged-rocket-fuel.png"
   },
   {
     "id": "packaged-sulfuric-acid",
@@ -3334,7 +3461,8 @@
         "ratePerMin": 40.0
       }
     ],
-    "unlockMethod": "Tier 7 - Control System Development"
+    "unlockMethod": "Tier 7 - Control System Development",
+    "icon": "icons/packaged-sulfuric-acid.png"
   },
   {
     "id": "packaged-turbofuel",
@@ -3359,7 +3487,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Turbofuel OR Tier 7 - Control System Development OR MAM Sulfur Research - Compacted Coal AND Tier 5 - Oil Processing"
+    "unlockMethod": "MAM Sulfur Research - Turbofuel OR Tier 7 - Control System Development OR MAM Sulfur Research - Compacted Coal AND Tier 5 - Oil Processing",
+    "icon": "icons/packaged-turbofuel.png"
   },
   {
     "id": "packaged-water",
@@ -3384,7 +3513,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 5 - Fluid Packaging"
+    "unlockMethod": "Tier 5 - Fluid Packaging",
+    "icon": "icons/packaged-water.png"
   },
   {
     "id": "parachute",
@@ -3409,7 +3539,8 @@
         "ratePerMin": 1.5
       }
     ],
-    "unlockMethod": "MAM Mycelia Research - Parachute"
+    "unlockMethod": "MAM Mycelia Research - Parachute",
+    "icon": "icons/parachute.png"
   },
   {
     "id": "petroleum-coke",
@@ -3430,7 +3561,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 5 - Oil Processing"
+    "unlockMethod": "Tier 5 - Oil Processing",
+    "icon": "icons/petroleum-coke.png"
   },
   {
     "id": "plastic",
@@ -3455,7 +3587,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "Tier 5 - Oil Processing"
+    "unlockMethod": "Tier 5 - Oil Processing",
+    "icon": "icons/plastic.png"
   },
   {
     "id": "plutonium-fuel-rod",
@@ -3488,7 +3621,8 @@
         "ratePerMin": 0.25
       }
     ],
-    "unlockMethod": "Tier 8 - Particle Enrichment"
+    "unlockMethod": "Tier 8 - Particle Enrichment",
+    "icon": "icons/plutonium-fuel-rod.png"
   },
   {
     "id": "plutonium-fuel-rod-burning",
@@ -3513,7 +3647,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "Tier 8 - Particle Enrichment"
+    "unlockMethod": "Tier 8 - Particle Enrichment",
+    "icon": "icons/plutonium-waste.png"
   },
   {
     "id": "plutonium-pellet",
@@ -3538,7 +3673,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 8 - Particle Enrichment"
+    "unlockMethod": "Tier 8 - Particle Enrichment",
+    "icon": "icons/plutonium-pellet.png"
   },
   {
     "id": "polyester-fabric",
@@ -3563,7 +3699,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "MAM Mycelia Research - Synthetic Polyester Fabric"
+    "unlockMethod": "MAM Mycelia Research - Synthetic Polyester Fabric",
+    "icon": "icons/fabric.png"
   },
   {
     "id": "portable-miner",
@@ -3588,7 +3725,8 @@
         "ratePerMin": 1.5
       }
     ],
-    "unlockMethod": "Tier 0 - HUB Upgrade 1"
+    "unlockMethod": "Tier 0 - HUB Upgrade 1",
+    "icon": "icons/portable-miner.png"
   },
   {
     "id": "power-shard-1",
@@ -3610,7 +3748,8 @@
         "ratePerMin": 7.5
       }
     ],
-    "unlockMethod": "MAM Power Slugs Research - Blue Power Slugs"
+    "unlockMethod": "MAM Power Slugs Research - Blue Power Slugs",
+    "icon": "icons/power-shard.png"
   },
   {
     "id": "power-shard-2",
@@ -3632,7 +3771,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "MAM Power Slugs Research - Yellow Power Slugs"
+    "unlockMethod": "MAM Power Slugs Research - Yellow Power Slugs",
+    "icon": "icons/power-shard.png"
   },
   {
     "id": "power-shard-5",
@@ -3654,7 +3794,8 @@
         "ratePerMin": 12.5
       }
     ],
-    "unlockMethod": "MAM Power Slugs Research - Purple Power Slugs"
+    "unlockMethod": "MAM Power Slugs Research - Purple Power Slugs",
+    "icon": "icons/power-shard.png"
   },
   {
     "id": "pressure-conversion-cube",
@@ -3680,7 +3821,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "Tier 8 - Particle Enrichment"
+    "unlockMethod": "Tier 8 - Particle Enrichment",
+    "icon": "icons/pressure-conversion-cube.png"
   },
   {
     "id": "protein-inhaler",
@@ -3705,7 +3847,8 @@
         "ratePerMin": 3.0
       }
     ],
-    "unlockMethod": "MAM Alien Megafauna Research - Protein Inhaler"
+    "unlockMethod": "MAM Alien Megafauna Research - Protein Inhaler",
+    "icon": "icons/medicinal-inhaler.png"
   },
   {
     "id": "pulse-nobelisk",
@@ -3731,7 +3874,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM Quartz Research - Explosive Resonance Application"
+    "unlockMethod": "MAM Quartz Research - Explosive Resonance Application",
+    "icon": "icons/pulse-nobelisk.png"
   },
   {
     "id": "quartz-crystal",
@@ -3753,7 +3897,8 @@
         "ratePerMin": 22.5
       }
     ],
-    "unlockMethod": "MAM Quartz Research - Quartz Crystals OR Tier 7 - Bauxite Refinement"
+    "unlockMethod": "MAM Quartz Research - Quartz Crystals OR Tier 7 - Bauxite Refinement",
+    "icon": "icons/quartz-crystal.png"
   },
   {
     "id": "quickwire",
@@ -3775,7 +3920,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "MAM Caterium Research - Quickwire OR Tier 5 - Petroleum Power"
+    "unlockMethod": "MAM Caterium Research - Quickwire OR Tier 5 - Petroleum Power",
+    "icon": "icons/quickwire.png"
   },
   {
     "id": "radio-control-unit",
@@ -3805,7 +3951,8 @@
         "ratePerMin": 2.5
       }
     ],
-    "unlockMethod": "Tier 7 - Control System Development"
+    "unlockMethod": "Tier 7 - Control System Development",
+    "icon": "icons/radio-control-unit.png"
   },
   {
     "id": "raw-quartz-bauxite",
@@ -3830,7 +3977,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/raw-quartz.png"
   },
   {
     "id": "raw-quartz-coal",
@@ -3855,7 +4003,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/raw-quartz.png"
   },
   {
     "id": "reanimated-sam",
@@ -3877,7 +4026,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "MAM Alien Technology Research - SAM Reanimation OR Tier 9 - Matter Conversion"
+    "unlockMethod": "MAM Alien Technology Research - SAM Reanimation OR Tier 9 - Matter Conversion",
+    "icon": "icons/reanimated-sam.png"
   },
   {
     "id": "rebar-gun",
@@ -3906,7 +4056,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "MAM Alien Megafauna Research - The Rebar Gun"
+    "unlockMethod": "MAM Alien Megafauna Research - The Rebar Gun",
+    "icon": "icons/rebar-gun.png"
   },
   {
     "id": "red-ficsmas-ornament-ficsmas",
@@ -3927,7 +4078,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 1"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - Giant FICSMAS Tree: Upgrade 1",
+    "icon": "icons/red-ficsmas-ornament.png"
   },
   {
     "id": "reinforced-iron-plate",
@@ -3953,7 +4105,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "Tier 0 - HUB Upgrade 3"
+    "unlockMethod": "Tier 0 - HUB Upgrade 3",
+    "icon": "icons/reinforced-iron-plate.png"
   },
   {
     "id": "residual-fuel",
@@ -3974,7 +4127,8 @@
         "ratePerMin": 40.0
       }
     ],
-    "unlockMethod": "Tier 5 - Oil Processing"
+    "unlockMethod": "Tier 5 - Oil Processing",
+    "icon": "icons/fuel.png"
   },
   {
     "id": "residual-plastic",
@@ -3999,7 +4153,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "Tier 5 - Oil Processing"
+    "unlockMethod": "Tier 5 - Oil Processing",
+    "icon": "icons/plastic.png"
   },
   {
     "id": "residual-rubber",
@@ -4024,7 +4179,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "Tier 5 - Oil Processing"
+    "unlockMethod": "Tier 5 - Oil Processing",
+    "icon": "icons/rubber.png"
   },
   {
     "id": "rifle",
@@ -4057,7 +4213,8 @@
         "ratePerMin": 0.5
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - The Rifle"
+    "unlockMethod": "MAM Sulfur Research - The Rifle",
+    "icon": "icons/rifle.png"
   },
   {
     "id": "rifle-ammo",
@@ -4083,7 +4240,8 @@
         "ratePerMin": 75.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - The Rifle"
+    "unlockMethod": "MAM Sulfur Research - The Rifle",
+    "icon": "icons/rifle-ammo.png"
   },
   {
     "id": "rocket-fuel",
@@ -4112,7 +4270,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Rocket Fuel"
+    "unlockMethod": "MAM Sulfur Research - Rocket Fuel",
+    "icon": "icons/rocket-fuel.png"
   },
   {
     "id": "rotor",
@@ -4138,7 +4297,8 @@
         "ratePerMin": 4.0
       }
     ],
-    "unlockMethod": "Tier 2 - Part Assembly"
+    "unlockMethod": "Tier 2 - Part Assembly",
+    "icon": "icons/rotor.png"
   },
   {
     "id": "rubber",
@@ -4163,7 +4323,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "Tier 5 - Oil Processing"
+    "unlockMethod": "Tier 5 - Oil Processing",
+    "icon": "icons/rubber.png"
   },
   {
     "id": "sam-fluctuator",
@@ -4193,7 +4354,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "MAM Alien Technology Research - SAM Fluctuator OR Tier 9 - Matter Conversion"
+    "unlockMethod": "MAM Alien Technology Research - SAM Fluctuator OR Tier 9 - Matter Conversion",
+    "icon": "icons/sam-fluctuator.png"
   },
   {
     "id": "screws",
@@ -4215,7 +4377,8 @@
         "ratePerMin": 40.0
       }
     ],
-    "unlockMethod": "Tier 0 - HUB Upgrade 3"
+    "unlockMethod": "Tier 0 - HUB Upgrade 3",
+    "icon": "icons/screws.png"
   },
   {
     "id": "shatter-rebar",
@@ -4241,7 +4404,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM Quartz Research - Shatter Rebar"
+    "unlockMethod": "MAM Quartz Research - Shatter Rebar",
+    "icon": "icons/shatter-rebar.png"
   },
   {
     "id": "silica",
@@ -4263,7 +4427,8 @@
         "ratePerMin": 37.5
       }
     ],
-    "unlockMethod": "MAM Quartz Research - Silica OR Tier 7 - Bauxite Refinement"
+    "unlockMethod": "MAM Quartz Research - Silica OR Tier 7 - Bauxite Refinement",
+    "icon": "icons/silica.png"
   },
   {
     "id": "singularity-cell",
@@ -4296,7 +4461,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "Tier 9 - Spatial Energy Regulation"
+    "unlockMethod": "Tier 9 - Spatial Energy Regulation",
+    "icon": "icons/singularity-cell.png"
   },
   {
     "id": "smart-plating",
@@ -4321,7 +4487,8 @@
         "ratePerMin": 2.0
       }
     ],
-    "unlockMethod": "Tier 2 - Part Assembly"
+    "unlockMethod": "Tier 2 - Part Assembly",
+    "icon": "icons/smart-plating.png"
   },
   {
     "id": "smokeless-powder",
@@ -4346,7 +4513,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Smokeless Powder"
+    "unlockMethod": "MAM Sulfur Research - Smokeless Powder",
+    "icon": "icons/smokeless-powder.png"
   },
   {
     "id": "snowball-ficsmas",
@@ -4367,7 +4535,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "MAM FICSMAS Holiday Event Research - Snowfight!"
+    "unlockMethod": "MAM FICSMAS Holiday Event Research - Snowfight!",
+    "icon": "icons/snowball.png"
   },
   {
     "id": "solid-biofuel",
@@ -4389,7 +4558,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 2 - Obstacle Clearing"
+    "unlockMethod": "Tier 2 - Obstacle Clearing",
+    "icon": "icons/solid-biofuel.png"
   },
   {
     "id": "sparkly-fireworks",
@@ -4415,7 +4585,8 @@
         "ratePerMin": 2.5
       }
     ],
-    "unlockMethod": "Equipment: Fireworks"
+    "unlockMethod": "Equipment: Fireworks",
+    "icon": "icons/sparkly-fireworks.png"
   },
   {
     "id": "spitter-protein",
@@ -4437,7 +4608,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "MAM Alien Megafauna Research - Spitter Research"
+    "unlockMethod": "MAM Alien Megafauna Research - Spitter Research",
+    "icon": "icons/alien-protein.png"
   },
   {
     "id": "stator",
@@ -4463,7 +4635,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "Tier 4 - Advanced Steel Production"
+    "unlockMethod": "Tier 4 - Advanced Steel Production",
+    "icon": "icons/stator.png"
   },
   {
     "id": "steel-beam",
@@ -4485,7 +4658,8 @@
         "ratePerMin": 15.0
       }
     ],
-    "unlockMethod": "Tier 3 - Basic Steel Production"
+    "unlockMethod": "Tier 3 - Basic Steel Production",
+    "icon": "icons/steel-beam.png"
   },
   {
     "id": "steel-ingot",
@@ -4511,7 +4685,8 @@
         "ratePerMin": 45.0
       }
     ],
-    "unlockMethod": "Tier 3 - Basic Steel Production"
+    "unlockMethod": "Tier 3 - Basic Steel Production",
+    "icon": "icons/steel-ingot.png"
   },
   {
     "id": "steel-pipe",
@@ -4533,7 +4708,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "Tier 3 - Basic Steel Production"
+    "unlockMethod": "Tier 3 - Basic Steel Production",
+    "icon": "icons/steel-pipe.png"
   },
   {
     "id": "stinger-protein",
@@ -4555,7 +4731,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "MAM Alien Megafauna Research - Stinger Research"
+    "unlockMethod": "MAM Alien Megafauna Research - Stinger Research",
+    "icon": "icons/alien-protein.png"
   },
   {
     "id": "stun-rebar",
@@ -4581,7 +4758,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "MAM Caterium Research - Stun Rebar"
+    "unlockMethod": "MAM Caterium Research - Stun Rebar",
+    "icon": "icons/stun-rebar.png"
   },
   {
     "id": "sulfur-coal",
@@ -4606,7 +4784,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/sulfur.png"
   },
   {
     "id": "sulfur-iron",
@@ -4631,7 +4810,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/sulfur.png"
   },
   {
     "id": "sulfuric-acid",
@@ -4656,7 +4836,8 @@
         "ratePerMin": 50.0
       }
     ],
-    "unlockMethod": "Tier 7 - Control System Development"
+    "unlockMethod": "Tier 7 - Control System Development",
+    "icon": "icons/sulfuric-acid.png"
   },
   {
     "id": "supercomputer",
@@ -4690,7 +4871,8 @@
         "ratePerMin": 1.875
       }
     ],
-    "unlockMethod": "Tier 7 - Control System Development"
+    "unlockMethod": "Tier 7 - Control System Development",
+    "icon": "icons/supercomputer.png"
   },
   {
     "id": "superposition-oscillator",
@@ -4727,7 +4909,8 @@
         "ratePerMin": 125.0
       }
     ],
-    "unlockMethod": "Tier 9 - Quantum Encoding"
+    "unlockMethod": "Tier 9 - Quantum Encoding",
+    "icon": "icons/superposition-oscillator.png"
   },
   {
     "id": "sweet-fireworks",
@@ -4753,7 +4936,8 @@
         "ratePerMin": 2.5
       }
     ],
-    "unlockMethod": "Equipment: Fireworks"
+    "unlockMethod": "Equipment: Fireworks",
+    "icon": "icons/sweet-fireworks.png"
   },
   {
     "id": "synthetic-power-shard",
@@ -4790,7 +4974,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "MAM Power Slugs Research - Synthetic Power Shards"
+    "unlockMethod": "MAM Power Slugs Research - Synthetic Power Shards",
+    "icon": "icons/power-shard.png"
   },
   {
     "id": "therapeutic-inhaler",
@@ -4819,7 +5004,8 @@
         "ratePerMin": 3.0
       }
     ],
-    "unlockMethod": "MAM Mycelia Research - Therapeutic Inhaler"
+    "unlockMethod": "MAM Mycelia Research - Therapeutic Inhaler",
+    "icon": "icons/medicinal-inhaler.png"
   },
   {
     "id": "thermal-propulsion-rocket",
@@ -4852,7 +5038,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "Tier 8 - Leading-Edge Production"
+    "unlockMethod": "Tier 8 - Leading-Edge Production",
+    "icon": "icons/thermal-propulsion-rocket.png"
   },
   {
     "id": "time-crystal",
@@ -4873,7 +5060,8 @@
         "ratePerMin": 6.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/time-crystal.png"
   },
   {
     "id": "turbo-motor",
@@ -4907,7 +5095,8 @@
         "ratePerMin": 1.875
       }
     ],
-    "unlockMethod": "Tier 8 - Leading-Edge Production"
+    "unlockMethod": "Tier 8 - Leading-Edge Production",
+    "icon": "icons/turbo-motor.png"
   },
   {
     "id": "turbo-rifle-ammo",
@@ -4936,7 +5125,8 @@
         "ratePerMin": 250.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Turbo Rifle Ammo"
+    "unlockMethod": "MAM Sulfur Research - Turbo Rifle Ammo",
+    "icon": "icons/turbo-rifle-ammo.png"
   },
   {
     "id": "turbofuel",
@@ -4961,7 +5151,8 @@
         "ratePerMin": 18.75
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Turbofuel"
+    "unlockMethod": "MAM Sulfur Research - Turbofuel",
+    "icon": "icons/turbofuel.png"
   },
   {
     "id": "unpackage-alumina-solution",
@@ -4986,7 +5177,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Tier 7 - Bauxite Refinement",
+    "icon": "icons/alumina-solution.png"
   },
   {
     "id": "unpackage-fuel",
@@ -5011,7 +5203,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 5 - Fluid Packaging"
+    "unlockMethod": "Tier 5 - Fluid Packaging",
+    "icon": "icons/fuel.png"
   },
   {
     "id": "unpackage-heavy-oil-residue",
@@ -5036,7 +5229,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "Tier 5 - Fluid Packaging"
+    "unlockMethod": "Tier 5 - Fluid Packaging",
+    "icon": "icons/heavy-oil-residue.png"
   },
   {
     "id": "unpackage-ionized-fuel",
@@ -5061,7 +5255,8 @@
         "ratePerMin": 40.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Ionized Fuel"
+    "unlockMethod": "MAM Sulfur Research - Ionized Fuel",
+    "icon": "icons/ionized-fuel.png"
   },
   {
     "id": "unpackage-liquid-biofuel",
@@ -5086,7 +5281,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 5 - Fluid Packaging"
+    "unlockMethod": "Tier 5 - Fluid Packaging",
+    "icon": "icons/liquid-biofuel.png"
   },
   {
     "id": "unpackage-nitric-acid",
@@ -5111,7 +5307,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "Tier 8 - Particle Enrichment"
+    "unlockMethod": "Tier 8 - Particle Enrichment",
+    "icon": "icons/nitric-acid.png"
   },
   {
     "id": "unpackage-nitrogen-gas",
@@ -5136,7 +5333,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 8 - Advanced Aluminum Production"
+    "unlockMethod": "Tier 8 - Advanced Aluminum Production",
+    "icon": "icons/nitrogen-gas.png"
   },
   {
     "id": "unpackage-oil",
@@ -5161,7 +5359,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 5 - Fluid Packaging"
+    "unlockMethod": "Tier 5 - Fluid Packaging",
+    "icon": "icons/crude-oil.png"
   },
   {
     "id": "unpackage-rocket-fuel",
@@ -5186,7 +5385,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Rocket Fuel"
+    "unlockMethod": "MAM Sulfur Research - Rocket Fuel",
+    "icon": "icons/rocket-fuel.png"
   },
   {
     "id": "unpackage-sulfuric-acid",
@@ -5211,7 +5411,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Tier 7 - Control System Development"
+    "unlockMethod": "Tier 7 - Control System Development",
+    "icon": "icons/sulfuric-acid.png"
   },
   {
     "id": "unpackage-turbofuel",
@@ -5236,7 +5437,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "MAM Sulfur Research - Turbofuel OR Tier 7 - Control System Development OR MAM Sulfur Research - Compacted Coal AND Tier 5 - Oil Processing"
+    "unlockMethod": "MAM Sulfur Research - Turbofuel OR Tier 7 - Control System Development OR MAM Sulfur Research - Compacted Coal AND Tier 5 - Oil Processing",
+    "icon": "icons/turbofuel.png"
   },
   {
     "id": "unpackage-water",
@@ -5261,7 +5463,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 5 - Fluid Packaging"
+    "unlockMethod": "Tier 5 - Fluid Packaging",
+    "icon": "icons/water.png"
   },
   {
     "id": "uranium-fuel-rod",
@@ -5290,7 +5493,8 @@
         "ratePerMin": 0.4
       }
     ],
-    "unlockMethod": "Tier 8 - Nuclear Power"
+    "unlockMethod": "Tier 8 - Nuclear Power",
+    "icon": "icons/uranium-fuel-rod.png"
   },
   {
     "id": "uranium-fuel-rod-burning",
@@ -5315,7 +5519,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "Tier 8 - Nuclear Power"
+    "unlockMethod": "Tier 8 - Nuclear Power",
+    "icon": "icons/uranium-waste.png"
   },
   {
     "id": "uranium-ore-bauxite",
@@ -5340,7 +5545,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Tier 9 - Matter Conversion"
+    "unlockMethod": "Tier 9 - Matter Conversion",
+    "icon": "icons/uranium.png"
   },
   {
     "id": "versatile-framework",
@@ -5365,7 +5571,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "Tier 3 - Basic Steel Production"
+    "unlockMethod": "Tier 3 - Basic Steel Production",
+    "icon": "icons/versatile-framework.png"
   },
   {
     "id": "vitamin-inhaler",
@@ -5390,7 +5597,8 @@
         "ratePerMin": 3.0
       }
     ],
-    "unlockMethod": "MAM Mycelia Research - Vitamin Inhaler"
+    "unlockMethod": "MAM Mycelia Research - Vitamin Inhaler",
+    "icon": "icons/medicinal-inhaler.png"
   },
   {
     "id": "wire",
@@ -5412,7 +5620,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Tier 0 - HUB Upgrade 2"
+    "unlockMethod": "Tier 0 - HUB Upgrade 2",
+    "icon": "icons/wire.png"
   },
   {
     "id": "xeno-basher",
@@ -5445,7 +5654,8 @@
         "ratePerMin": 0.75
       }
     ],
-    "unlockMethod": "Tier 3 - Enhanced Asset Security"
+    "unlockMethod": "Tier 3 - Enhanced Asset Security",
+    "icon": "icons/xeno-basher.png"
   },
   {
     "id": "xeno-zapper",
@@ -5478,7 +5688,8 @@
         "ratePerMin": 1.5
       }
     ],
-    "unlockMethod": "Onboarding"
+    "unlockMethod": "Onboarding",
+    "icon": "icons/xeno-zapper.png"
   },
   {
     "id": "zipline",
@@ -5511,7 +5722,8 @@
         "ratePerMin": 1.5
       }
     ],
-    "unlockMethod": "MAM Caterium Research - Zipline"
+    "unlockMethod": "MAM Caterium Research - Zipline",
+    "icon": "icons/zipline.png"
   },
   {
     "id": "adhered-iron-plate-alternate",
@@ -5536,7 +5748,8 @@
         "ratePerMin": 3.75
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/reinforced-iron-plate.png"
   },
   {
     "id": "alclad-casing-alternate",
@@ -5561,7 +5774,8 @@
         "ratePerMin": 112.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement",
+    "icon": "icons/aluminum-casing.png"
   },
   {
     "id": "aluminum-beam-alternate",
@@ -5582,7 +5796,8 @@
         "ratePerMin": 22.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement",
+    "icon": "icons/steel-beam.png"
   },
   {
     "id": "aluminum-rod-alternate",
@@ -5603,7 +5818,8 @@
         "ratePerMin": 52.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement",
+    "icon": "icons/iron-rod.png"
   },
   {
     "id": "automated-miner-alternate",
@@ -5628,7 +5844,8 @@
         "ratePerMin": 1.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/portable-miner.png"
   },
   {
     "id": "automated-speed-wiring-alternate",
@@ -5657,7 +5874,8 @@
         "ratePerMin": 7.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - AI Limiter AND Tier 4 - Advanced Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - AI Limiter AND Tier 4 - Advanced Steel Production",
+    "icon": "icons/automated-wiring.png"
   },
   {
     "id": "basic-iron-ingot-alternate",
@@ -5682,7 +5900,8 @@
         "ratePerMin": 50.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/iron-ingot.png"
   },
   {
     "id": "bolted-frame-alternate",
@@ -5707,7 +5926,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 2 - Part Assembly"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 2 - Part Assembly",
+    "icon": "icons/modular-frame.png"
   },
   {
     "id": "bolted-iron-plate-alternate",
@@ -5732,7 +5952,8 @@
         "ratePerMin": 15.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 2 - Part Assembly"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 2 - Part Assembly",
+    "icon": "icons/reinforced-iron-plate.png"
   },
   {
     "id": "cast-screws-alternate",
@@ -5753,7 +5974,8 @@
         "ratePerMin": 50.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 1 - Field Research"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 1 - Field Research",
+    "icon": "icons/screws.png"
   },
   {
     "id": "caterium-circuit-board-alternate",
@@ -5778,7 +6000,8 @@
         "ratePerMin": 8.75
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Ingots AND Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Ingots AND Tier 5 - Oil Processing",
+    "icon": "icons/circuit-board.png"
   },
   {
     "id": "caterium-computer-alternate",
@@ -5807,7 +6030,8 @@
         "ratePerMin": 3.75
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Ingots AND Tier 6 - Industrial Manufacturing"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Ingots AND Tier 6 - Industrial Manufacturing",
+    "icon": "icons/computer.png"
   },
   {
     "id": "caterium-wire-alternate",
@@ -5828,7 +6052,8 @@
         "ratePerMin": 120.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium",
+    "icon": "icons/wire.png"
   },
   {
     "id": "cheap-silica-alternate",
@@ -5853,7 +6078,8 @@
         "ratePerMin": 52.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Silica"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Silica",
+    "icon": "icons/silica.png"
   },
   {
     "id": "classic-battery-alternate",
@@ -5886,7 +6112,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development",
+    "icon": "icons/battery.png"
   },
   {
     "id": "cloudy-diamonds-alternate",
@@ -5911,7 +6138,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 9 - Matter Conversion"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 9 - Matter Conversion",
+    "icon": "icons/diamonds.png"
   },
   {
     "id": "coated-cable-alternate",
@@ -5936,7 +6164,8 @@
         "ratePerMin": 67.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/cable.png"
   },
   {
     "id": "coated-iron-canister-alternate",
@@ -5961,7 +6190,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Fluid Packaging"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Fluid Packaging",
+    "icon": "icons/empty-canister.png"
   },
   {
     "id": "coated-iron-plate-alternate",
@@ -5986,7 +6216,8 @@
         "ratePerMin": 75.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/iron-plate.png"
   },
   {
     "id": "coke-steel-ingot-alternate",
@@ -6011,7 +6242,8 @@
         "ratePerMin": 100.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/steel-ingot.png"
   },
   {
     "id": "compacted-steel-ingot-alternate",
@@ -6036,7 +6268,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Sulfur Research - Compacted Coal AND Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Sulfur Research - Compacted Coal AND Tier 3 - Basic Steel Production",
+    "icon": "icons/steel-ingot.png"
   },
   {
     "id": "cooling-device-alternate",
@@ -6065,7 +6298,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Advanced Aluminum Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Advanced Aluminum Production",
+    "icon": "icons/cooling-system.png"
   },
   {
     "id": "copper-alloy-ingot-alternate",
@@ -6090,7 +6324,8 @@
         "ratePerMin": 100.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/copper-ingot.png"
   },
   {
     "id": "copper-rotor-alternate",
@@ -6115,7 +6350,8 @@
         "ratePerMin": 11.25
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 2 - Part Assembly"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 2 - Part Assembly",
+    "icon": "icons/rotor.png"
   },
   {
     "id": "crystal-computer-alternate",
@@ -6140,7 +6376,8 @@
         "ratePerMin": 3.33333
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz Crystals AND Tier 6 - Industrial Manufacturing"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz Crystals AND Tier 6 - Industrial Manufacturing",
+    "icon": "icons/computer.png"
   },
   {
     "id": "dark-matter-crystallization-alternate",
@@ -6161,7 +6398,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 9 - Quantum Encoding"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 9 - Quantum Encoding",
+    "icon": "icons/dark-matter-crystal.png"
   },
   {
     "id": "dark-matter-trap-alternate",
@@ -6186,7 +6424,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 9 - Quantum Encoding"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 9 - Quantum Encoding",
+    "icon": "icons/dark-matter-crystal.png"
   },
   {
     "id": "dark-ion-fuel-alternate",
@@ -6215,7 +6454,8 @@
         "ratePerMin": 40.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Sulfur Research - Ionized Fuel AND Tier 9 - Quantum Encoding"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Sulfur Research - Ionized Fuel AND Tier 9 - Quantum Encoding",
+    "icon": "icons/ionized-fuel.png"
   },
   {
     "id": "diluted-fuel-alternate",
@@ -6240,7 +6480,8 @@
         "ratePerMin": 100.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development",
+    "icon": "icons/fuel.png"
   },
   {
     "id": "diluted-packaged-fuel-alternate",
@@ -6265,7 +6506,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/packaged-fuel.png"
   },
   {
     "id": "distilled-silica-alternate",
@@ -6298,7 +6540,8 @@
         "ratePerMin": 80.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development",
+    "icon": "icons/silica.png"
   },
   {
     "id": "electric-motor-alternate",
@@ -6323,7 +6566,8 @@
         "ratePerMin": 7.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Nuclear Power"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Nuclear Power",
+    "icon": "icons/motor.png"
   },
   {
     "id": "electrode-aluminum-scrap-alternate",
@@ -6352,7 +6596,8 @@
         "ratePerMin": 105.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement",
+    "icon": "icons/aluminum-scrap.png"
   },
   {
     "id": "electrode-circuit-board-alternate",
@@ -6377,7 +6622,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/circuit-board.png"
   },
   {
     "id": "electromagnetic-connection-rod-alternate",
@@ -6402,7 +6648,8 @@
         "ratePerMin": 8.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - AI Limiter AND Tier 8 - Nuclear Power"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - AI Limiter AND Tier 8 - Nuclear Power",
+    "icon": "icons/electromagnetic-control-rod.png"
   },
   {
     "id": "encased-industrial-pipe-alternate",
@@ -6427,7 +6674,8 @@
         "ratePerMin": 4.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 4 - Advanced Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 4 - Advanced Steel Production",
+    "icon": "icons/encased-industrial-beam.png"
   },
   {
     "id": "fertile-uranium-alternate",
@@ -6464,7 +6712,8 @@
         "ratePerMin": 40.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Particle Enrichment"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Particle Enrichment",
+    "icon": "icons/non-fissile-uranium.png"
   },
   {
     "id": "fine-black-powder-alternate",
@@ -6489,7 +6738,8 @@
         "ratePerMin": 45.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Sulfur Research - Compacted Coal"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Sulfur Research - Compacted Coal",
+    "icon": "icons/black-powder.png"
   },
   {
     "id": "fine-concrete-alternate",
@@ -6514,7 +6764,8 @@
         "ratePerMin": 50.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz",
+    "icon": "icons/concrete.png"
   },
   {
     "id": "flexible-framework-alternate",
@@ -6543,7 +6794,8 @@
         "ratePerMin": 7.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/versatile-framework.png"
   },
   {
     "id": "fused-quartz-crystal-alternate",
@@ -6568,7 +6820,8 @@
         "ratePerMin": 54.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz Crystals AND Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz Crystals AND Tier 3 - Basic Steel Production",
+    "icon": "icons/quartz-crystal.png"
   },
   {
     "id": "fused-quickwire-alternate",
@@ -6593,7 +6846,8 @@
         "ratePerMin": 90.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Ingots"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Ingots",
+    "icon": "icons/quickwire.png"
   },
   {
     "id": "fused-wire-alternate",
@@ -6618,7 +6872,8 @@
         "ratePerMin": 90.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium",
+    "icon": "icons/wire.png"
   },
   {
     "id": "heat-exchanger-alternate",
@@ -6643,7 +6898,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Advanced Aluminum Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Advanced Aluminum Production",
+    "icon": "icons/heat-sink.png"
   },
   {
     "id": "heat-fused-frame-alternate",
@@ -6676,7 +6932,8 @@
         "ratePerMin": 3.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Particle Enrichment"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Particle Enrichment",
+    "icon": "icons/fused-modular-frame.png"
   },
   {
     "id": "heavy-encased-frame-alternate",
@@ -6709,7 +6966,8 @@
         "ratePerMin": 2.8125
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 6 - Industrial Manufacturing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 6 - Industrial Manufacturing",
+    "icon": "icons/heavy-modular-frame.png"
   },
   {
     "id": "heavy-flexible-frame-alternate",
@@ -6742,7 +7000,8 @@
         "ratePerMin": 3.75
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 6 - Industrial Manufacturing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 6 - Industrial Manufacturing",
+    "icon": "icons/heavy-modular-frame.png"
   },
   {
     "id": "heavy-oil-residue-alternate",
@@ -6767,7 +7026,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/heavy-oil-residue.png"
   },
   {
     "id": "infused-uranium-cell-alternate",
@@ -6800,7 +7060,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Ingots AND MAM Quartz Research - Quartz AND MAM Sulfur Research - Sulfur AND Tier 8 - Nuclear Power"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Ingots AND MAM Quartz Research - Quartz AND MAM Sulfur Research - Sulfur AND Tier 8 - Nuclear Power",
+    "icon": "icons/encased-uranium-cell.png"
   },
   {
     "id": "instant-plutonium-cell-alternate",
@@ -6825,7 +7086,8 @@
         "ratePerMin": 10.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Particle Enrichment"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Particle Enrichment",
+    "icon": "icons/encased-plutonium-cell.png"
   },
   {
     "id": "instant-scrap-alternate",
@@ -6862,7 +7124,8 @@
         "ratePerMin": 50.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement AND Tier 7 - Control System Development"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement AND Tier 7 - Control System Development",
+    "icon": "icons/aluminum-scrap.png"
   },
   {
     "id": "insulated-cable-alternate",
@@ -6887,7 +7150,8 @@
         "ratePerMin": 100.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/cable.png"
   },
   {
     "id": "insulated-crystal-oscillator-alternate",
@@ -6916,7 +7180,8 @@
         "ratePerMin": 1.875
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Electronics AND MAM Quartz Research - Crystal Oscillator AND Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Electronics AND MAM Quartz Research - Crystal Oscillator AND Tier 5 - Oil Processing",
+    "icon": "icons/crystal-oscillator.png"
   },
   {
     "id": "iron-alloy-ingot-alternate",
@@ -6941,7 +7206,8 @@
         "ratePerMin": 75.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/iron-ingot.png"
   },
   {
     "id": "iron-pipe-alternate",
@@ -6962,7 +7228,8 @@
         "ratePerMin": 25.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/steel-pipe.png"
   },
   {
     "id": "iron-wire-alternate",
@@ -6983,7 +7250,8 @@
         "ratePerMin": 22.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 1 - Field Research"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 1 - Field Research",
+    "icon": "icons/wire.png"
   },
   {
     "id": "leached-caterium-ingot-alternate",
@@ -7008,7 +7276,8 @@
         "ratePerMin": 36.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development",
+    "icon": "icons/caterium-ingot.png"
   },
   {
     "id": "leached-copper-ingot-alternate",
@@ -7033,7 +7302,8 @@
         "ratePerMin": 110.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development",
+    "icon": "icons/copper-ingot.png"
   },
   {
     "id": "leached-iron-ingot-alternate",
@@ -7058,7 +7328,8 @@
         "ratePerMin": 100.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development",
+    "icon": "icons/iron-ingot.png"
   },
   {
     "id": "molded-beam-alternate",
@@ -7083,7 +7354,8 @@
         "ratePerMin": 45.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/steel-beam.png"
   },
   {
     "id": "molded-steel-pipe-alternate",
@@ -7108,7 +7380,8 @@
         "ratePerMin": 50.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/steel-pipe.png"
   },
   {
     "id": "nitro-rocket-fuel-alternate",
@@ -7145,7 +7418,8 @@
         "ratePerMin": 25.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Sulfur Research - Rocket Fuel"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Sulfur Research - Rocket Fuel",
+    "icon": "icons/rocket-fuel.png"
   },
   {
     "id": "oc-supercomputer-alternate",
@@ -7170,7 +7444,8 @@
         "ratePerMin": 3.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development AND Tier 8 - Advanced Aluminum Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development AND Tier 8 - Advanced Aluminum Production",
+    "icon": "icons/supercomputer.png"
   },
   {
     "id": "oil-based-diamonds-alternate",
@@ -7191,7 +7466,8 @@
         "ratePerMin": 40.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 9 - Matter Conversion"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 9 - Matter Conversion",
+    "icon": "icons/diamonds.png"
   },
   {
     "id": "petroleum-diamonds-alternate",
@@ -7212,7 +7488,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 9 - Matter Conversion"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 9 - Matter Conversion",
+    "icon": "icons/diamonds.png"
   },
   {
     "id": "pink-diamonds-alternate",
@@ -7237,7 +7514,8 @@
         "ratePerMin": 15.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 9 - Matter Conversion"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 9 - Matter Conversion",
+    "icon": "icons/diamonds.png"
   },
   {
     "id": "plastic-ai-limiter-alternate",
@@ -7262,7 +7540,8 @@
         "ratePerMin": 8.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - AI Limiter AND Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - AI Limiter AND Tier 5 - Oil Processing",
+    "icon": "icons/ai-limiter.png"
   },
   {
     "id": "plastic-smart-plating-alternate",
@@ -7291,7 +7570,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/smart-plating.png"
   },
   {
     "id": "plutonium-fuel-unit-alternate",
@@ -7316,7 +7596,8 @@
         "ratePerMin": 0.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Particle Enrichment"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Particle Enrichment",
+    "icon": "icons/plutonium-fuel-rod.png"
   },
   {
     "id": "polymer-resin-alternate",
@@ -7341,7 +7622,8 @@
         "ratePerMin": 20.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/polymer-resin.png"
   },
   {
     "id": "pure-aluminum-ingot-alternate",
@@ -7362,7 +7644,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement",
+    "icon": "icons/aluminum-ingot.png"
   },
   {
     "id": "pure-caterium-ingot-alternate",
@@ -7387,7 +7670,8 @@
         "ratePerMin": 12.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium AND Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium AND Tier 5 - Oil Processing",
+    "icon": "icons/caterium-ingot.png"
   },
   {
     "id": "pure-copper-ingot-alternate",
@@ -7412,7 +7696,8 @@
         "ratePerMin": 37.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/copper-ingot.png"
   },
   {
     "id": "pure-iron-ingot-alternate",
@@ -7437,7 +7722,8 @@
         "ratePerMin": 65.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/iron-ingot.png"
   },
   {
     "id": "pure-quartz-crystal-alternate",
@@ -7462,7 +7748,8 @@
         "ratePerMin": 52.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz Crystals AND Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz Crystals AND Tier 5 - Oil Processing",
+    "icon": "icons/quartz-crystal.png"
   },
   {
     "id": "quartz-purification-alternate",
@@ -7491,7 +7778,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development",
+    "icon": "icons/quartz-crystal.png"
   },
   {
     "id": "quickwire-cable-alternate",
@@ -7516,7 +7804,8 @@
         "ratePerMin": 27.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Ingots AND Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Ingots AND Tier 5 - Oil Processing",
+    "icon": "icons/cable.png"
   },
   {
     "id": "quickwire-stator-alternate",
@@ -7541,7 +7830,8 @@
         "ratePerMin": 8.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Ingots AND Tier 4 - Advanced Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - Caterium Ingots AND Tier 4 - Advanced Steel Production",
+    "icon": "icons/stator.png"
   },
   {
     "id": "radio-connection-unit-alternate",
@@ -7570,7 +7860,8 @@
         "ratePerMin": 3.75
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - AI Limiter AND Tier 8 - Advanced Aluminum Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - AI Limiter AND Tier 8 - Advanced Aluminum Production",
+    "icon": "icons/radio-control-unit.png"
   },
   {
     "id": "radio-control-system-alternate",
@@ -7603,7 +7894,8 @@
         "ratePerMin": 4.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development",
+    "icon": "icons/radio-control-unit.png"
   },
   {
     "id": "recycled-plastic-alternate",
@@ -7628,7 +7920,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/plastic.png"
   },
   {
     "id": "recycled-rubber-alternate",
@@ -7653,7 +7946,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/rubber.png"
   },
   {
     "id": "rigor-motor-alternate",
@@ -7682,7 +7976,8 @@
         "ratePerMin": 7.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz Crystals AND Tier 4 - Advanced Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz Crystals AND Tier 4 - Advanced Steel Production",
+    "icon": "icons/motor.png"
   },
   {
     "id": "rubber-concrete-alternate",
@@ -7707,7 +8002,8 @@
         "ratePerMin": 90.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/concrete.png"
   },
   {
     "id": "silicon-circuit-board-alternate",
@@ -7732,7 +8028,8 @@
         "ratePerMin": 12.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz AND Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz AND Tier 5 - Oil Processing",
+    "icon": "icons/circuit-board.png"
   },
   {
     "id": "silicon-high-speed-connector-alternate",
@@ -7761,7 +8058,8 @@
         "ratePerMin": 3.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - High-Speed Connector AND MAM Quartz Research - Quartz AND Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Caterium Research - High-Speed Connector AND MAM Quartz Research - Quartz AND Tier 5 - Oil Processing",
+    "icon": "icons/high-speed-connector.png"
   },
   {
     "id": "sloppy-alumina-alternate",
@@ -7786,7 +8084,8 @@
         "ratePerMin": 240.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Bauxite Refinement",
+    "icon": "icons/alumina-solution.png"
   },
   {
     "id": "solid-steel-ingot-alternate",
@@ -7811,7 +8110,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/steel-ingot.png"
   },
   {
     "id": "steamed-copper-sheet-alternate",
@@ -7836,7 +8136,8 @@
         "ratePerMin": 22.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Coal Power"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Coal Power",
+    "icon": "icons/copper-sheet.png"
   },
   {
     "id": "steel-canister-alternate",
@@ -7857,7 +8158,8 @@
         "ratePerMin": 40.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Fluid Packaging"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Fluid Packaging",
+    "icon": "icons/empty-canister.png"
   },
   {
     "id": "steel-cast-plate-alternate",
@@ -7882,7 +8184,8 @@
         "ratePerMin": 45.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/iron-plate.png"
   },
   {
     "id": "steel-rod-alternate",
@@ -7903,7 +8206,8 @@
         "ratePerMin": 48.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/iron-rod.png"
   },
   {
     "id": "steel-rotor-alternate",
@@ -7928,7 +8232,8 @@
         "ratePerMin": 5.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/rotor.png"
   },
   {
     "id": "steel-screws-alternate",
@@ -7949,7 +8254,8 @@
         "ratePerMin": 260.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/screws.png"
   },
   {
     "id": "steeled-frame-alternate",
@@ -7974,7 +8280,8 @@
         "ratePerMin": 3.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Basic Steel Production",
+    "icon": "icons/modular-frame.png"
   },
   {
     "id": "stitched-iron-plate-alternate",
@@ -7999,7 +8306,8 @@
         "ratePerMin": 5.625
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 2 - Part Assembly"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 2 - Part Assembly",
+    "icon": "icons/reinforced-iron-plate.png"
   },
   {
     "id": "super-state-computer-alternate",
@@ -8032,7 +8340,8 @@
         "ratePerMin": 2.4
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development AND Tier 8 - Nuclear Power"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development AND Tier 8 - Nuclear Power",
+    "icon": "icons/supercomputer.png"
   },
   {
     "id": "tempered-caterium-ingot-alternate",
@@ -8057,7 +8366,8 @@
         "ratePerMin": 22.5
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/caterium-ingot.png"
   },
   {
     "id": "tempered-copper-ingot-alternate",
@@ -8082,7 +8392,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 5 - Oil Processing",
+    "icon": "icons/copper-ingot.png"
   },
   {
     "id": "turbo-blend-fuel-alternate",
@@ -8115,7 +8426,8 @@
         "ratePerMin": 45.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 7 - Control System Development",
+    "icon": "icons/turbofuel.png"
   },
   {
     "id": "turbo-diamonds-alternate",
@@ -8140,7 +8452,8 @@
         "ratePerMin": 60.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Sulfur Research - Turbofuel AND Tier 9 - Matter Conversion"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Sulfur Research - Turbofuel AND Tier 9 - Matter Conversion",
+    "icon": "icons/diamonds.png"
   },
   {
     "id": "turbo-electric-motor-alternate",
@@ -8173,7 +8486,8 @@
         "ratePerMin": 2.8125
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Nuclear Power AND Tier 8 - Leading-Edge Production"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Nuclear Power AND Tier 8 - Leading-Edge Production",
+    "icon": "icons/turbo-motor.png"
   },
   {
     "id": "turbo-heavy-fuel-alternate",
@@ -8198,7 +8512,8 @@
         "ratePerMin": 30.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Sulfur Research - Compacted Coal AND Tier 5 - Oil Processing"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Sulfur Research - Compacted Coal AND Tier 5 - Oil Processing",
+    "icon": "icons/turbofuel.png"
   },
   {
     "id": "turbo-pressure-motor-alternate",
@@ -8231,7 +8546,8 @@
         "ratePerMin": 3.75
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Particle Enrichment"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 8 - Particle Enrichment",
+    "icon": "icons/turbo-motor.png"
   },
   {
     "id": "uranium-fuel-unit-alternate",
@@ -8264,7 +8580,8 @@
         "ratePerMin": 0.6
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz Crystals AND Tier 8 - Nuclear Power"
+    "unlockMethod": "Hard Drive scanning after unlocking: MAM Quartz Research - Quartz Crystals AND Tier 8 - Nuclear Power",
+    "icon": "icons/uranium-fuel-rod.png"
   },
   {
     "id": "wet-concrete-alternate",
@@ -8289,6 +8606,7 @@
         "ratePerMin": 80.0
       }
     ],
-    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Coal Power"
+    "unlockMethod": "Hard Drive scanning after unlocking: Tier 3 - Coal Power",
+    "icon": "icons/concrete.png"
   }
 ]

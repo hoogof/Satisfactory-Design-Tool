@@ -1,7 +1,8 @@
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import { Handle, Position } from '@xyflow/react';
 import type { NodeProps } from '@xyflow/react';
-import { usePlannerStore, deriveFlowFromHandle } from '../store';
+import { usePlannerStore, deriveFlowFromHandle, round4 } from '../store';
+import { ItemIcon } from '../components/ItemIcon';
 import type { SplitterMergerNodeData } from '../types';
 
 export type { SplitterMergerNodeData };
@@ -39,6 +40,7 @@ export function SplitterMergerNode({ id, data, selected }: NodeProps) {
   const { updateNodeData, deleteNode, deleteEdgesForHandle } = usePlannerStore();
   const nodes = usePlannerStore(s => s.nodes);
   const edges = usePlannerStore(s => s.edges);
+  const conservationError = usePlannerStore(s => s.conservationIssues.some(i => i.nodeId === id));
 
   const inputCount  = Math.max(MIN_PORTS, d.inputCount  ?? 1);
   const outputCount = Math.max(MIN_PORTS, d.outputCount ?? 2);
@@ -93,7 +95,7 @@ export function SplitterMergerNode({ id, data, selected }: NodeProps) {
   }, [outputRates, outputCount]);
 
   const commitRate = useCallback((idx: number, raw: string) => {
-    const val = Math.max(0, evalMath(raw) ?? outputRates[idx] ?? 0);
+    const val = round4(Math.max(0, evalMath(raw) ?? outputRates[idx] ?? 0));
     const newRates = [...outputRates];
     while (newRates.length <= idx) newRates.push(0);
     newRates[idx] = val;
@@ -129,7 +131,7 @@ export function SplitterMergerNode({ id, data, selected }: NodeProps) {
   const bodyH    = rowCount * PORT_H + CTRL_H;
 
   return (
-    <div className={`sm-node node-drag-handle${selected ? ' sm-node--selected' : ''}`}>
+    <div className={`sm-node node-drag-handle${selected ? ' sm-node--selected' : ''}${conservationError ? ' node--conservation-error' : ''}`}>
 
       {/* ── Input handles — left edge ── */}
       {Array.from({ length: inputCount }, (_, i) => (
@@ -174,7 +176,7 @@ export function SplitterMergerNode({ id, data, selected }: NodeProps) {
       <div className={`sm-node__summary${isOver ? ' sm-node__summary--over' : ''}`}>
         <span className="sm-node__locked-item">
           {lockedItem
-            ? lockedItem
+            ? <><ItemIcon name={lockedItem} size={16} /> {lockedItem}</>
             : <em className="sm-node__no-item">Connect an input</em>
           }
         </span>

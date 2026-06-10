@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Handle, Position, type NodeProps } from '@xyflow/react';
 import type { SourceNodeData } from '../types';
 import { usePlannerStore, RAW_RESOURCES } from '../store';
+import { ItemIcon } from '../components/ItemIcon';
 
 // Same math evaluator as in RecipeNode
 function evalMath(expr: string): number | null {
@@ -22,7 +23,7 @@ function evalMath(expr: string): number | null {
 
 export const SourceNode = memo(({ id, data, selected }: NodeProps) => {
   const d = data as unknown as SourceNodeData;
-  const { updateNodeData, deleteNode, deleteEdgesForHandle } = usePlannerStore();
+  const { updateNodeData, deleteNode, deleteEdgesForHandle, scaleConnectedNodes } = usePlannerStore();
 
   const [rateStr, setRateStr] = useState(String(d.ratePerMin ?? 60));
   const rateInputRef = useRef<HTMLInputElement>(null);
@@ -43,9 +44,15 @@ export const SourceNode = memo(({ id, data, selected }: NodeProps) => {
   const commitRate = useCallback(() => {
     const evaluated = evalMath(rateStr);
     const final = evaluated ?? 60;
+    // Read the live store value — avoids stale-closure issues with d.ratePerMin
+    const liveNode = usePlannerStore.getState().nodes.find(n => n.id === id);
+    const prev = ((liveNode?.data as unknown as SourceNodeData)?.ratePerMin) ?? 60;
     setRateStr(String(final));
     updateNodeData(id, { ratePerMin: final });
-  }, [rateStr, id, updateNodeData]);
+    if (final !== prev && prev > 0) {
+      scaleConnectedNodes(id, final / prev);
+    }
+  }, [rateStr, id, updateNodeData, scaleConnectedNodes]);
 
   const handleRateKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -74,15 +81,18 @@ export const SourceNode = memo(({ id, data, selected }: NodeProps) => {
 
       <div className="source-node__body">
         {/* Resource selector */}
-        <select
-          className="source-node__resource-select"
-          value={d.item}
-          onChange={handleResourceChange}
-        >
-          {RAW_RESOURCES.map(r => (
-            <option key={r.name} value={r.name}>{r.name}</option>
-          ))}
-        </select>
+        <div className="source-node__resource-row">
+          <ItemIcon name={d.item} />
+          <select
+            className="source-node__resource-select"
+            value={d.item}
+            onChange={handleResourceChange}
+          >
+            {RAW_RESOURCES.map(r => (
+              <option key={r.name} value={r.name}>{r.name}</option>
+            ))}
+          </select>
+        </div>
 
         {/* Rate input with math expression support */}
         <div className="source-node__rate-row">

@@ -35,8 +35,11 @@ export interface SourceNodeData extends Record<string, unknown> {
   ratePerMin: number;
 }
 
+// A sink is a terminal node: it consumes everything connected to it.
+// It carries no amount of its own — what it consumes is derived from its
+// incoming edges at render time.
 export interface SinkNodeData extends Record<string, unknown> {
-  item: string;
+  label?: string;
 }
 
 // memberIds removed — membership is derived from node.parentId === factoryId

@@ -9,7 +9,7 @@ import {
   type OnEdgesChange,
   type OnConnect,
 } from '@xyflow/react';
-import type { RecipeNodeData, SourceNodeData, FactoryNodeData, SplitterMergerNodeData } from './types';
+import type { RecipeNodeData, SourceNodeData, FactoryNodeData, SplitterMergerNodeData, SinkNodeData } from './types';
 import recipesRaw from './data/recipes.json';
 import machinesRaw from './data/machines.json';
 import type { Recipe, Machine } from './types';
@@ -182,12 +182,153 @@ export function nextId() {
   return `node_${nodeIdCounter++}`;
 }
 
+// Single rounding rule for every written amount — 4 decimal places.
+// Keeps float tails (0.30000000000000004) out of stored data while staying
+// well inside the conservation-check tolerance.
+export function round4(x: number): number {
+  return Math.round(x * 10000) / 10000;
+}
+
 /** Advance the counter past the highest numeric ID in the given node list. */
 function seedCounter(nodes: Node[]) {
   for (const n of nodes) {
     const num = parseInt(n.id.replace('node_', ''), 10);
     if (!isNaN(num) && num >= nodeIdCounter) nodeIdCounter = num + 1;
   }
+}
+
+const itemSlug = (item: string) => item.toLowerCase().replace(/[^a-z0-9]/g, '-');
+
+// ── Connection type check ────────────────────────────────────────
+// A link is only valid when the item flowing out of the source handle matches
+// the item the target handle expects. Used by both React Flow's
+// isValidConnection (live feedback while dragging) and onConnect (final gate).
+// When the source item can't be resolved (e.g. recipe not picked yet) we
+// allow the connection rather than block the user on unknowns.
+export function connectionItemsMatch(
+  source: string,
+  sourceHandle: string,
+  target: string,
+  targetHandle: string,
+  nodes: Node[],
+  edges: Edge[]
+): boolean {
+  const flow = deriveFlowFromHandle(source, sourceHandle, nodes, edges);
+  if (!flow?.item) return true;
+  const srcSlug = itemSlug(flow.item);
+
+  // Splitter/merger inputs are untyped until something flows in — then every
+  // further input must carry the same item. (Check before the generic -in-
+  // match below: "-sm-in-0" would also match that pattern.)
+  if (/-sm-in-\d+$/.test(targetHandle)) {
+    const tgt = nodes.find(n => n.id === target);
+    if (tgt?.type !== 'splitterMergerNode') return true;
+    const d = tgt.data as unknown as SplitterMergerNodeData;
+    const inCount = d.inputCount ?? 1;
+    for (let i = 0; i < inCount; i++) {
+      const e = edges.find(e => e.targetHandle === `${target}-sm-in-${i}`);
+      if (!e) continue;
+      const existing = deriveFlowFromHandle(e.source, e.sourceHandle ?? '', nodes, edges);
+      if (existing?.item) return itemSlug(existing.item) === srcSlug;
+    }
+    return true;
+  }
+
+  // Recipe inputs ({id}-in-{slug}) and factory border inputs
+  // ({id}-factory-in-{slug}) encode the expected item in the handle ID.
+  const m = targetHandle.match(/-in-(.+)$/);
+  if (m) return m[1] === srcSlug;
+
+  return true;
+}
+
+// ── Conservation sanity check (LHS = RHS) ───────────────────────
+// After any autoscale pass we verify that, for every node, what flows IN
+// matches what the node expects / sends OUT. Floats are compared with a
+// combined absolute + relative tolerance — never strict equality.
+
+export interface ConservationIssue {
+  nodeId: string;
+  label:  string;
+  lhs:    number;   // total incoming /min
+  rhs:    number;   // total outgoing (or required) /min
+}
+
+export const CONSERVATION_EPS = 0.005;
+
+export function conservationOk(lhs: number, rhs: number): boolean {
+  return Math.abs(lhs - rhs) <= CONSERVATION_EPS + 1e-6 * Math.max(Math.abs(lhs), Math.abs(rhs));
+}
+
+export function checkConservation(nodes: Node[], edges: Edge[]): ConservationIssue[] {
+  const issues: ConservationIssue[] = [];
+
+  for (const node of nodes) {
+    if (node.type === 'recipeNode') {
+      // LHS = what connected upstream edges actually deliver
+      // RHS = what this node consumes at its current machine count
+      const d = node.data as unknown as RecipeNodeData;
+      const recipe = d.recipe ?? recipeMap.get(d.recipeId);
+      if (!recipe) continue;
+      const scale = d.machineCount || 1;
+      let lhs = 0, rhs = 0, connected = false;
+
+      for (const inp of recipe.inputs) {
+        const hid = `${node.id}-in-${inp.item.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
+        const incoming = edges.filter(e => e.target === node.id && e.targetHandle === hid);
+        if (incoming.length === 0) continue;   // unconnected input — nothing to compare
+        let supplied = 0;
+        let resolvable = false;
+        for (const e of incoming) {
+          const flow = deriveFlowFromHandle(e.source, e.sourceHandle ?? '', nodes, edges);
+          if (flow) { supplied += flow.rate; resolvable = true; }
+        }
+        if (!resolvable) continue;             // upstream not resolvable — skip, don't false-flag
+        connected = true;
+        lhs += supplied;
+        rhs += inp.ratePerMin * scale;
+      }
+      if (connected && !conservationOk(lhs, rhs)) {
+        issues.push({ nodeId: node.id, label: recipe.name, lhs, rhs });
+      }
+    }
+
+    if (node.type === 'splitterMergerNode') {
+      // LHS = sum of inflows, RHS = sum of allocated output rates
+      const d = node.data as unknown as SplitterMergerNodeData;
+      const inCount = d.inputCount ?? 1;
+      let lhs = 0, connected = false;
+      for (let i = 0; i < inCount; i++) {
+        const e = edges.find(e => e.targetHandle === `${node.id}-sm-in-${i}`);
+        if (!e) continue;
+        const flow = deriveFlowFromHandle(e.source, e.sourceHandle ?? '', nodes, edges);
+        if (flow) { lhs += flow.rate; connected = true; }
+      }
+      if (!connected) continue;
+      const rhs = (d.outputRates ?? []).slice(0, d.outputCount ?? 0).reduce((a, b) => a + b, 0);
+      if (!conservationOk(lhs, rhs)) {
+        issues.push({ nodeId: node.id, label: d.label || 'Router', lhs, rhs });
+      }
+    }
+  }
+
+  return issues;
+}
+
+// Run the conservation check and publish results to the store + console.
+function runConservationCheck(
+  get: () => { nodes: Node[]; edges: Edge[] },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  set: (partial: any) => void
+) {
+  const { nodes, edges } = get();
+  const issues = checkConservation(nodes, edges);
+  for (const i of issues) {
+    console.warn(
+      `[conservation] ${i.label} (${i.nodeId}): inputs ${round4(i.lhs)}/min ≠ outputs ${round4(i.rhs)}/min (Δ ${round4(i.lhs - i.rhs)})`
+    );
+  }
+  set({ conservationIssues: issues });
 }
 
 // Propagate a scale ratio to connected nodes.
@@ -217,7 +358,7 @@ function propagateScale(
         return {
           nodes: state.nodes.map(n =>
             n.id === nodeId
-              ? { ...n, data: { ...n.data, machineCount: Math.round(cur * ratio * 10000) / 10000 } }
+              ? { ...n, data: { ...n.data, machineCount: round4(cur * ratio) } }
               : n
           ),
         };
@@ -227,7 +368,17 @@ function propagateScale(
         return {
           nodes: state.nodes.map(n =>
             n.id === nodeId
-              ? { ...n, data: { ...n.data, ratePerMin: Math.round(cur * ratio * 10000) / 10000 } }
+              ? { ...n, data: { ...n.data, ratePerMin: round4(cur * ratio) } }
+              : n
+          ),
+        };
+      }
+      if (node.type === 'splitterMergerNode') {
+        const rates = (d.outputRates as number[] | undefined) ?? [];
+        return {
+          nodes: state.nodes.map(n =>
+            n.id === nodeId
+              ? { ...n, data: { ...n.data, outputRates: rates.map(r => round4(r * ratio)) } }
               : n
           ),
         };
@@ -313,12 +464,61 @@ function hydrateNodes(nodes: Node[]): Node[] {
   }));
 }
 
-function loadAutosave(): { nodes: Node[]; edges: Edge[] } | null {
+// ── Sheets ────────────────────────────────────────────────────────
+// The canvas is split into independent sheets (like spreadsheet tabs).
+// The ACTIVE sheet's nodes/edges are canonical in state.nodes/state.edges;
+// the `sheets` array holds the data of inactive sheets and is synced from
+// the live state on every sheet operation and on autosave.
+
+export interface SheetData {
+  id:    string;
+  name:  string;
+  nodes: Node[];
+  edges: Edge[];
+}
+
+function newSheetId() {
+  return `sheet_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+}
+
+// Sheets with the active sheet's data refreshed from live state
+function syncedSheets(s: { sheets: SheetData[]; activeSheetId: string; nodes: Node[]; edges: Edge[] }): SheetData[] {
+  return s.sheets.map(sh =>
+    sh.id === s.activeSheetId ? { ...sh, nodes: s.nodes, edges: s.edges } : sh
+  );
+}
+
+// Accepts both the current multi-sheet format ({sheets, activeSheetId})
+// and the legacy single-canvas format ({nodes, edges}).
+function parseWorkspace(raw: string): { sheets: SheetData[]; activeSheetId: string } | null {
+  const parsed = JSON.parse(raw);
+  if (Array.isArray(parsed.sheets) && parsed.sheets.length > 0) {
+    const sheets: SheetData[] = parsed.sheets.map((s: SheetData) => ({
+      id:    s.id || newSheetId(),
+      name:  s.name || 'Sheet',
+      nodes: hydrateNodes(s.nodes ?? []),
+      edges: s.edges ?? [],
+    }));
+    const activeSheetId = sheets.some(s => s.id === parsed.activeSheetId)
+      ? parsed.activeSheetId
+      : sheets[0].id;
+    return { sheets, activeSheetId };
+  }
+  if (Array.isArray(parsed.nodes)) {
+    const sheet: SheetData = {
+      id: newSheetId(), name: 'Sheet 1',
+      nodes: hydrateNodes(parsed.nodes), edges: parsed.edges ?? [],
+    };
+    return { sheets: [sheet], activeSheetId: sheet.id };
+  }
+  return null;
+}
+
+function loadAutosave(): { sheets: SheetData[]; activeSheetId: string } | null {
   try {
     const raw = localStorage.getItem(LS_AUTOSAVE);
     if (!raw) return null;
-    const { nodes, edges } = JSON.parse(raw);
-    return { nodes: hydrateNodes(nodes), edges };
+    return parseWorkspace(raw);
   } catch { return null; }
 }
 
@@ -327,12 +527,29 @@ function loadSlots(): SavedSlot[] {
   catch { return []; }
 }
 
+interface ClipboardData {
+  nodes: Node[];
+  edges: Edge[];
+}
+
 interface PlannerState {
   nodes: Node[];
   edges: Edge[];
   autoScale: boolean;
+  conservationIssues: ConservationIssue[];
   savedSlots: SavedSlot[];
+  sheets: SheetData[];
+  activeSheetId: string;
+  clipboard: ClipboardData | null;
   toggleAutoScale: () => void;
+  dismissConservationIssues: () => void;
+  addSheet:    () => void;
+  renameSheet: (id: string, name: string) => void;
+  deleteSheet: (id: string) => void;
+  switchSheet: (id: string) => void;
+  copySelection:  () => void;
+  cutSelection:   () => void;
+  pasteClipboard: () => void;
   saveSlot:   (name: string) => void;
   loadSlot:   (id: string)   => void;
   deleteSlot: (id: string)   => void;
@@ -342,6 +559,7 @@ interface PlannerState {
   addRecipeNode:          (recipeId?: string, position?: { x: number; y: number }) => void;
   addSourceNode:          (item: string,      position?: { x: number; y: number }) => void;
   addSplitterMergerNode:  (position?: { x: number; y: number }) => void;
+  addSinkNode:            (position?: { x: number; y: number }) => void;
   addFactoryNode: (memberIds: string[]) => void;
   addToFactory:   (factoryId: string, newMemberIds: string[]) => void;
   updateNodeData: (nodeId: string, patch: Record<string, unknown>) => void;
@@ -353,15 +571,178 @@ interface PlannerState {
   importJSON:     (json: string) => void;
 }
 
-const _initial = loadAutosave();
+const _initial = loadAutosave() ?? (() => {
+  const sheet: SheetData = { id: newSheetId(), name: 'Sheet 1', nodes: [], edges: [] };
+  return { sheets: [sheet], activeSheetId: sheet.id };
+})();
+const _initialActive = _initial.sheets.find(s => s.id === _initial.activeSheetId)!;
 
 export const usePlannerStore = create<PlannerState>((set, get) => ({
-  nodes: _initial?.nodes ?? [],
-  edges: _initial?.edges ?? [],
+  nodes: _initialActive.nodes,
+  edges: _initialActive.edges,
   autoScale: true,
+  conservationIssues: [],
   savedSlots: loadSlots(),
+  sheets: _initial.sheets,
+  activeSheetId: _initial.activeSheetId,
+  clipboard: null,
 
   toggleAutoScale: () => set(s => ({ autoScale: !s.autoScale })),
+
+  dismissConservationIssues: () => set({ conservationIssues: [] }),
+
+  // ── Sheets ─────────────────────────────────────────────────────
+
+  addSheet: () => {
+    const sheet: SheetData = {
+      id: newSheetId(), name: `Sheet ${get().sheets.length + 1}`, nodes: [], edges: [],
+    };
+    set({
+      sheets: [...syncedSheets(get()), sheet],
+      activeSheetId: sheet.id,
+      nodes: [], edges: [],
+      conservationIssues: [],
+    });
+  },
+
+  renameSheet: (id, name) => {
+    const trimmed = name.trim();
+    if (!trimmed) return;
+    set({ sheets: get().sheets.map(s => s.id === id ? { ...s, name: trimmed } : s) });
+  },
+
+  deleteSheet: (id) => {
+    const { sheets, activeSheetId } = get();
+    if (sheets.length <= 1) return;   // always keep at least one sheet
+    const remaining = sheets.filter(s => s.id !== id);
+    if (id !== activeSheetId) {
+      set({ sheets: remaining });
+      return;
+    }
+    const next = remaining[0];
+    set({
+      sheets: remaining,
+      activeSheetId: next.id,
+      nodes: next.nodes, edges: next.edges,
+      conservationIssues: [],
+    });
+  },
+
+  switchSheet: (id) => {
+    const { activeSheetId, sheets } = get();
+    if (id === activeSheetId) return;
+    const target = sheets.find(s => s.id === id);
+    if (!target) return;
+    set({
+      sheets: syncedSheets(get()),
+      activeSheetId: id,
+      nodes: target.nodes, edges: target.edges,
+      conservationIssues: [],
+    });
+  },
+
+  // ── Clipboard (copy / cut / paste) ─────────────────────────────
+  // The clipboard lives in the store, so it survives sheet switches —
+  // copy on one sheet, paste on another.
+
+  copySelection: () => {
+    const { nodes, edges } = get();
+    const ids = new Set(nodes.filter(n => n.selected).map(n => n.id));
+    // A selected factory implicitly brings all its members
+    for (const n of nodes) if (n.parentId && ids.has(n.parentId)) ids.add(n.id);
+    if (ids.size === 0) return;
+
+    const copied = nodes.filter(n => ids.has(n.id)).map(n => {
+      // A child copied without its factory becomes a free node at its
+      // absolute position
+      if (n.parentId && !ids.has(n.parentId)) {
+        const parent = nodes.find(p => p.id === n.parentId);
+        return {
+          ...n,
+          parentId: undefined,
+          extent:   undefined,
+          position: {
+            x: n.position.x + (parent?.position.x ?? 0),
+            y: n.position.y + (parent?.position.y ?? 0),
+          },
+        };
+      }
+      return n;
+    });
+    const copiedEdges = edges.filter(e => ids.has(e.source) && ids.has(e.target));
+
+    // Deep-clone via JSON so later canvas edits can't mutate the clipboard
+    set({ clipboard: JSON.parse(JSON.stringify({ nodes: copied, edges: copiedEdges })) });
+  },
+
+  cutSelection: () => {
+    get().copySelection();
+    const { nodes, edges } = get();
+    const ids = new Set(nodes.filter(n => n.selected).map(n => n.id));
+    for (const n of nodes) if (n.parentId && ids.has(n.parentId)) ids.add(n.id);
+    if (ids.size === 0) return;
+    set({
+      nodes: nodes.filter(n => !ids.has(n.id)),
+      edges: edges.filter(e => !ids.has(e.source) && !ids.has(e.target)),
+    });
+  },
+
+  pasteClipboard: () => {
+    const clip = get().clipboard;
+    if (!clip || clip.nodes.length === 0) return;
+
+    const OFFSET = 48;
+    const idMap = new Map(clip.nodes.map(n => [n.id, nextId()]));
+    // Handle IDs embed the node ID ({nodeId}-in-..., {nodeId}-sm-out-0, ...)
+    // and must be rewritten alongside it
+    const remapHandle = (handle: string | null | undefined, oldId: string) =>
+      handle && handle.startsWith(`${oldId}-`)
+        ? `${idMap.get(oldId)}${handle.slice(oldId.length)}`
+        : handle ?? undefined;
+
+    const pastedNodes: Node[] = clip.nodes.map(n => {
+      const clone: Node = JSON.parse(JSON.stringify(n));
+      clone.id = idMap.get(n.id)!;
+      clone.selected = true;
+      clone.dragHandle = DRAG_HANDLE;
+      if (clone.parentId) {
+        // Parent is always in the clipboard (copySelection guarantees it);
+        // children keep their relative position and move with the factory.
+        clone.parentId = idMap.get(clone.parentId);
+      } else {
+        clone.position = { x: clone.position.x + OFFSET, y: clone.position.y + OFFSET };
+      }
+      if (clone.type === 'recipeNode') {
+        const d = clone.data as unknown as RecipeNodeData;
+        clone.data = { ...clone.data, recipe: recipeMap.get(d.recipeId) };
+      }
+      return clone;
+    });
+
+    const pastedEdges: Edge[] = clip.edges.map(e => ({
+      ...JSON.parse(JSON.stringify(e)),
+      id:           nextId(),
+      source:       idMap.get(e.source)!,
+      target:       idMap.get(e.target)!,
+      sourceHandle: remapHandle(e.sourceHandle, e.source),
+      targetHandle: remapHandle(e.targetHandle, e.target),
+      selected:     false,
+    }));
+
+    set({
+      // Deselect everything else so the pasted block becomes the selection
+      nodes: sortNodes([
+        ...get().nodes.map(n => (n.selected ? { ...n, selected: false } : n)),
+        ...pastedNodes,
+      ]),
+      edges: [...get().edges, ...pastedEdges],
+      // Shift the stored clipboard so repeated pastes cascade instead of stacking
+      clipboard: {
+        nodes: clip.nodes.map(n => n.parentId ? n : { ...n, position: { x: n.position.x + OFFSET, y: n.position.y + OFFSET } }),
+        edges: clip.edges,
+      },
+    });
+  },
 
   saveSlot: (name) => {
     const { nodes, edges } = get();
@@ -400,27 +781,20 @@ export const usePlannerStore = create<PlannerState>((set, get) => ({
   },
 
   onConnect: (connection) => {
-    // ── Validate splitter-merger input connections ──────────────
-    // Only allow connections where the item type matches what's already flowing in
-    if (connection.targetHandle?.includes('-sm-in-')) {
+    // ── Item type check ──────────────────────────────────────────
+    // Reject any link whose source item doesn't match the target handle's
+    // expected item (recipe inputs, factory inputs, splitter/merger inputs).
+    {
       const { nodes, edges } = get();
-      const tgtNode = nodes.find(n => n.id === connection.target);
-      if (tgtNode?.type === 'splitterMergerNode') {
-        const smData = tgtNode.data as unknown as SplitterMergerNodeData;
-        const newFlow = deriveFlowFromHandle(connection.source, connection.sourceHandle ?? '', nodes, edges);
-        if (newFlow?.item) {
-          const inCount = smData.inputCount ?? 1;
-          for (let i = 0; i < inCount; i++) {
-            const existing = edges.find(e => e.targetHandle === `${connection.target}-sm-in-${i}`);
-            if (!existing) continue;
-            const existingFlow = deriveFlowFromHandle(existing.source, existing.sourceHandle ?? '', nodes, edges);
-            if (existingFlow?.item && existingFlow.item !== newFlow.item) {
-              // Item mismatch — silently reject the connection
-              return;
-            }
-            break; // only need to check once
-          }
-        }
+      if (!connectionItemsMatch(
+        connection.source,
+        connection.sourceHandle ?? '',
+        connection.target,
+        connection.targetHandle ?? '',
+        nodes,
+        edges
+      )) {
+        return;
       }
     }
 
@@ -474,6 +848,7 @@ export const usePlannerStore = create<PlannerState>((set, get) => ({
 
     // Propagate downstream only from the newly connected target
     propagateScale(get, set, tgtNode.id, newCount / prevCount, false);
+    runConservationCheck(get, set);
   },
 
   addRecipeNode: (recipeId = '', position = { x: 200, y: 200 }) => {
@@ -515,6 +890,18 @@ export const usePlannerStore = create<PlannerState>((set, get) => ({
       position,
       dragHandle: DRAG_HANDLE,
       data: { label: 'Router', inputCount: 1, outputCount: 2, outputRates: [0, 0] } satisfies SplitterMergerNodeData,
+    };
+    set({ nodes: sortNodes([...get().nodes, node]) });
+  },
+
+  addSinkNode: (position = { x: 400, y: 200 }) => {
+    const id = nextId();
+    const node: Node = {
+      id,
+      type: 'sinkNode',
+      position,
+      dragHandle: DRAG_HANDLE,
+      data: {} satisfies SinkNodeData,
     };
     set({ nodes: sortNodes([...get().nodes, node]) });
   },
@@ -615,6 +1002,8 @@ export const usePlannerStore = create<PlannerState>((set, get) => ({
     if (!get().autoScale) return;
     // Manual count change: propagate bidirectionally (upstream + downstream)
     propagateScale(get, set, startNodeId, ratio, true);
+    // Post-scale sanity check: every node's inputs must still equal its outputs
+    runConservationCheck(get, set);
   },
 
   deleteEdgesForHandle: (handleId) => {
@@ -644,23 +1033,34 @@ export const usePlannerStore = create<PlannerState>((set, get) => ({
   clearAll: () => set({ nodes: [], edges: [] }),
 
   exportJSON: () => {
-    const { nodes, edges } = get();
-    return JSON.stringify({ nodes, edges }, null, 2);
+    const { activeSheetId } = get();
+    return JSON.stringify({ sheets: syncedSheets(get()), activeSheetId }, null, 2);
   },
 
   importJSON: (json) => {
     try {
-      const { nodes, edges } = JSON.parse(json);
-      set({ nodes: hydrateNodes(nodes), edges });
+      // Accepts multi-sheet exports and legacy {nodes, edges} files
+      const ws = parseWorkspace(json);
+      if (!ws) throw new Error('not a planner export');
+      const active = ws.sheets.find(s => s.id === ws.activeSheetId)!;
+      set({
+        sheets: ws.sheets,
+        activeSheetId: ws.activeSheetId,
+        nodes: active.nodes, edges: active.edges,
+        conservationIssues: [],
+      });
     } catch (e) {
       console.error('Import failed', e);
     }
   },
 }));
 
-// Auto-save to localStorage on every nodes/edges change
-usePlannerStore.subscribe(({ nodes, edges }) => {
+// Auto-save to localStorage on every change (all sheets)
+usePlannerStore.subscribe((s) => {
   try {
-    localStorage.setItem(LS_AUTOSAVE, JSON.stringify({ nodes, edges }));
+    localStorage.setItem(
+      LS_AUTOSAVE,
+      JSON.stringify({ sheets: syncedSheets(s), activeSheetId: s.activeSheetId })
+    );
   } catch { /* quota exceeded — silently ignore */ }
 });

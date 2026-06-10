@@ -9,6 +9,7 @@ import {
   type NodeTypes,
   type Node,
   type Edge,
+  type Connection,
   MarkerType,
   useReactFlow,
   ReactFlowProvider,
@@ -20,11 +21,12 @@ import { RecipeNode } from './nodes/RecipeNode';
 import { SourceNode } from './nodes/SourceNode';
 import { FactoryNode } from './nodes/FactoryNode';
 import { SplitterMergerNode } from './nodes/SplitterMergerNode';
+import { SinkNode } from './nodes/SinkNode';
 import { DeletableEdge } from './edges/DeletableEdge';
 import { Sidebar } from './components/Sidebar';
 import { QuickSearch } from './components/QuickSearch';
 import { HelpModal } from './components/HelpModal';
-import { usePlannerStore, recipeMap, getCategoryColor } from './store';
+import { usePlannerStore, recipeMap, getCategoryColor, connectionItemsMatch } from './store';
 import type { RecipeNodeData, SplitterMergerNodeData } from './types';
 
 const nodeTypes: NodeTypes = {
@@ -32,6 +34,7 @@ const nodeTypes: NodeTypes = {
   sourceNode:          SourceNode          as never,
   factoryNode:         FactoryNode         as never,
   splitterMergerNode:  SplitterMergerNode  as never,
+  sinkNode:            SinkNode            as never,
 };
 
 const edgeTypes = {
@@ -151,6 +154,96 @@ function useEdgeStyles(nodes: Node[], edges: Edge[]): Edge[] {
   });
 }
 
+// Spreadsheet-style tabs for switching between independent factory sheets.
+// Double-click a tab to rename it; × deletes (with confirm when non-empty).
+function SheetTabs() {
+  const sheets        = usePlannerStore(s => s.sheets);
+  const activeSheetId = usePlannerStore(s => s.activeSheetId);
+  const { switchSheet, addSheet, renameSheet, deleteSheet } = usePlannerStore();
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [draft, setDraft]         = useState('');
+
+  const commitRename = () => {
+    if (editingId) renameSheet(editingId, draft);
+    setEditingId(null);
+  };
+
+  const handleDelete = (id: string, name: string) => {
+    // The active sheet's live nodes are in state.nodes, not sheets[]
+    const st = usePlannerStore.getState();
+    const nodeCount = id === st.activeSheetId
+      ? st.nodes.length
+      : st.sheets.find(s => s.id === id)?.nodes.length ?? 0;
+    if (nodeCount > 0 && !window.confirm(`Delete sheet "${name}" and its ${nodeCount} node${nodeCount !== 1 ? 's' : ''}?`)) {
+      return;
+    }
+    deleteSheet(id);
+  };
+
+  return (
+    <div className="sheet-tabs">
+      {sheets.map(sheet => (
+        <div
+          key={sheet.id}
+          className={`sheet-tab${sheet.id === activeSheetId ? ' sheet-tab--active' : ''}`}
+          onClick={() => switchSheet(sheet.id)}
+          onDoubleClick={() => { setEditingId(sheet.id); setDraft(sheet.name); }}
+          title="Double-click to rename"
+        >
+          {editingId === sheet.id ? (
+            <input
+              className="sheet-tab__rename"
+              value={draft}
+              autoFocus
+              onChange={e => setDraft(e.target.value)}
+              onBlur={commitRename}
+              onKeyDown={e => {
+                if (e.key === 'Enter') commitRename();
+                if (e.key === 'Escape') setEditingId(null);
+              }}
+              onClick={e => e.stopPropagation()}
+            />
+          ) : (
+            <span className="sheet-tab__name">{sheet.name}</span>
+          )}
+          {sheets.length > 1 && (
+            <button
+              className="sheet-tab__close"
+              onClick={e => { e.stopPropagation(); handleDelete(sheet.id, sheet.name); }}
+              title="Delete sheet"
+            >✕</button>
+          )}
+        </div>
+      ))}
+      <button className="sheet-tabs__add" onClick={addSheet} title="New sheet">+</button>
+    </div>
+  );
+}
+
+// Warning toast shown when the post-autoscale conservation check fails.
+// Lists every node whose total inputs (LHS) ≠ total outputs (RHS).
+function ConservationWarning() {
+  const issues  = usePlannerStore(s => s.conservationIssues);
+  const dismiss = usePlannerStore(s => s.dismissConservationIssues);
+  if (issues.length === 0) return null;
+  return (
+    <div className="conservation-toast" role="alert">
+      <div className="conservation-toast__title">
+        ⚠ Flow imbalance after auto-scale
+        <button className="conservation-toast__close" onClick={dismiss} title="Dismiss">✕</button>
+      </div>
+      <ul className="conservation-toast__list">
+        {issues.map(i => (
+          <li key={i.nodeId}>
+            <strong>{i.label}</strong> — in {i.lhs.toFixed(2)}/min, out {i.rhs.toFixed(2)}/min
+            {' '}(Δ {(i.lhs - i.rhs).toFixed(2)})
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function PlannerCanvas({ dark }: { dark: boolean }) {
   const { nodes, edges, onNodesChange, onEdgesChange, onConnect, addRecipeNode, addSourceNode } =
     usePlannerStore();
@@ -158,6 +251,21 @@ function PlannerCanvas({ dark }: { dark: boolean }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   const styledEdges = useEdgeStyles(nodes, edges);
+
+  // Live validation while dragging a connection: handles whose item type
+  // doesn't match the source are rejected (React Flow greys them out and
+  // refuses the drop).
+  const isValidConnection = useCallback((conn: Edge | Connection) => {
+    const { nodes, edges } = usePlannerStore.getState();
+    return connectionItemsMatch(
+      conn.source,
+      conn.sourceHandle ?? '',
+      conn.target,
+      conn.targetHandle ?? '',
+      nodes,
+      edges
+    );
+  }, []);
 
   const onDragOver = useCallback((event: React.DragEvent) => {
     event.preventDefault();
@@ -184,6 +292,7 @@ function PlannerCanvas({ dark }: { dark: boolean }) {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        isValidConnection={isValidConnection}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         onDragOver={onDragOver}
@@ -221,6 +330,7 @@ function PlannerCanvas({ dark }: { dark: boolean }) {
         <MiniMap
           nodeColor={(n) => {
             if (n.type === 'sourceNode') return '#16a34a';
+            if (n.type === 'sinkNode')   return '#c84030';
             const d = n.data as unknown as RecipeNodeData;
             return getCategoryColor(d.selectedMachine ?? '');
           }}
@@ -248,12 +358,45 @@ export default function App() {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Shift') document.body.classList.add('shift-held');
 
-      // Press N to open quick-search (skip when typing in an input / textarea)
+      const target = e.target as HTMLElement;
+      const typing = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable;
+
+      // Copy / cut / paste the canvas selection (leave native clipboard
+      // behaviour alone while typing in a text field)
+      if ((e.ctrlKey || e.metaKey) && !typing) {
+        const k = e.key.toLowerCase();
+        if (k === 'c' || k === 'x' || k === 'v') {
+          const store = usePlannerStore.getState();
+          if (k === 'c') store.copySelection();
+          if (k === 'x') store.cutSelection();
+          if (k === 'v') store.pasteClipboard();
+          e.preventDefault();
+          return;
+        }
+      }
+
+      if (typing) return;
+
+      // Press N to open quick-search
       if (e.key === 'n' || e.key === 'N') {
-        const tag = (e.target as HTMLElement).tagName;
-        if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target as HTMLElement).isContentEditable) return;
         e.preventDefault();
         setQuickSearch(true);
+      }
+      // Press M to toggle auto-scale
+      if (e.key === 'm' || e.key === 'M') {
+        e.preventDefault();
+        usePlannerStore.getState().toggleAutoScale();
+      }
+      // Press L to toggle light/dark
+      if (e.key === 'l' || e.key === 'L') {
+        e.preventDefault();
+        setDark(d => !d);
+      }
+
+      // Press H to toggle help
+      if (e.key == "h" || e.key == "H") {
+        e.preventDefault();
+        setShowHelp(true);
       }
     };
     const onKeyUp = (e: KeyboardEvent) => {
@@ -276,14 +419,14 @@ export default function App() {
             onClick={toggleAutoScale}
             title="When on, changing a node's machine count scales all downstream nodes by the same ratio"
           >
-            {autoScale ? '⛓ Auto-Scale ON' : '⛓ Auto-Scale OFF'}
+            {autoScale ? '⛓ Auto-Scale ON' : '⛓ Auto-Scale OFF'} <kbd>M</kbd>
           </button>
           <button
             className="toolbar__btn"
             onClick={() => setDark(d => !d)}
             title="Toggle dark mode"
           >
-            {dark ? '☀ Light' : '◑ Dark'}
+            {dark ? '☀ Light' : '◑ Dark'} <kbd>L</kbd>
           </button>
           <button
             className="toolbar__btn"
@@ -297,11 +440,13 @@ export default function App() {
             onClick={() => setShowHelp(true)}
             title="Help"
           >
-            ? Help
+            ? Help <kbd>H</kbd>
           </button>
         </div>
         <Sidebar />
         <PlannerCanvas dark={dark} />
+        <SheetTabs />
+        <ConservationWarning />
         {quickSearch && <QuickSearch onClose={() => setQuickSearch(false)} />}
         {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
       </div>

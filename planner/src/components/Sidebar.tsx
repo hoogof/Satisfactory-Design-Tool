@@ -20,7 +20,7 @@ export function Sidebar() {
   const [showAlternates, setShowAlternates] = useState(false);
   const [saveName, setSaveName] = useState('');
   const { addRecipeNode, addSourceNode, addFactoryNode, addToFactory,
-          addSplitterMergerNode, nodes, edges,
+          addSplitterMergerNode, addSinkNode, nodes, edges,
           savedSlots, saveSlot, loadSlot, deleteSlot } = usePlannerStore();
   const { screenToFlowPosition } = useReactFlow();
 
@@ -142,6 +142,13 @@ export function Sidebar() {
           title="Add a splitter/merger router node"
         >
           ⇌ Router
+        </button>
+        <button
+          className="sidebar__btn sidebar__btn--add-sink"
+          onClick={() => addSinkNode(spawnPos())}
+          title="Add a sink — an end node that consumes everything connected to it"
+        >
+          ▼ Sink
         </button>
       </div>
 

@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Handle, Position, type NodeProps } from '@xyflow/react';
 import type { RecipeNodeData } from '../types';
 import { getCategoryColor, usePlannerStore, allRecipes, allMachines } from '../store';
+import { ItemIcon } from '../components/ItemIcon';
 
 function handleId(nodeId: string, item: string, side: 'in' | 'out') {
   return `${nodeId}-${side}-${item.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
@@ -41,6 +42,7 @@ export const RecipeNode = memo(({ id, data, selected }: NodeProps) => {
   const d = data as unknown as RecipeNodeData;
   const recipe = d.recipe;
   const { updateNodeData, deleteNode, scaleConnectedNodes, deleteEdgesForHandle } = usePlannerStore();
+  const conservationError = usePlannerStore(s => s.conservationIssues.some(i => i.nodeId === id));
 
   const color = getCategoryColor(d.selectedMachine ?? '');
 
@@ -115,7 +117,7 @@ export const RecipeNode = memo(({ id, data, selected }: NodeProps) => {
   const outputTops = handleTops(recipe?.outputs.length ?? 0);
 
   return (
-    <div className={`recipe-node${selected ? ' recipe-node--selected' : ''}`}>
+    <div className={`recipe-node${selected ? ' recipe-node--selected' : ''}${conservationError ? ' node--conservation-error' : ''}`}>
       {/* Left-edge input handles */}
       {recipe?.inputs.map((inp, i) => {
         const supply = d.inputSupply?.[inp.item];
@@ -153,6 +155,7 @@ export const RecipeNode = memo(({ id, data, selected }: NodeProps) => {
       <div className="recipe-node__header node-drag-handle">
         <div className="recipe-node__top-row">
           <span className="recipe-node__category-dot" style={{ background: color }} title={machine?.category} />
+          <ItemIcon name={machineName} size={16} />
           <span className="recipe-node__machine-label">{machineName || 'New node'}</span>
           <button className="recipe-node__delete" onClick={() => deleteNode(id)} title="Remove">✕</button>
         </div>
@@ -180,6 +183,7 @@ export const RecipeNode = memo(({ id, data, selected }: NodeProps) => {
               const sufficient = supply === undefined || supply >= needed - 0.01;
               return (
                 <div key={i} className="recipe-node__port-row">
+                  <ItemIcon name={inp.item} />
                   <span className={`recipe-node__rate${!sufficient ? ' recipe-node__rate--deficit' : ''}`}>
                     <strong>{inp.item}</strong>
                     <small>{(inp.ratePerMin * scale).toFixed(2)}/min</small>
@@ -192,6 +196,7 @@ export const RecipeNode = memo(({ id, data, selected }: NodeProps) => {
           <div className="recipe-node__ports recipe-node__ports--outputs">
             {recipe.outputs.map((out, i) => (
               <div key={i} className="recipe-node__port-row recipe-node__port-row--out">
+                <ItemIcon name={out.item} />
                 <span className="recipe-node__rate recipe-node__rate--output">
                   <strong>{out.item}</strong>
                   <small>{(out.ratePerMin * scale).toFixed(2)}/min</small>

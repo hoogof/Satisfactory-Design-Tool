@@ -79,12 +79,13 @@ export const FactoryNode = memo(({ id, data, selected }: NodeProps) => {
     };
   }, [id, nodes, edges]);
 
-  // Spread handles evenly along the node height (percentage-based)
-  function handlePositions(count: number): number[] {
-    if (count === 0) return [];
-    if (count === 1) return [50];
+  // Cluster handles with a small fixed gap, centered on the box's vertical
+  // midpoint — fixed spacing keeps tall boxes from spreading them apart.
+  const HANDLE_GAP = 30;   // px between adjacent handles
+
+  function handlePositions(count: number): string[] {
     return Array.from({ length: count }, (_, i) =>
-      10 + (80 / (count - 1)) * i
+      `calc(50% + ${(i - (count - 1) / 2) * HANDLE_GAP}px)`
     );
   }
 
@@ -98,7 +99,7 @@ export const FactoryNode = memo(({ id, data, selected }: NodeProps) => {
     >
       <NodeResizer
         minWidth={200}
-        minHeight={120}
+        minHeight={Math.max(120, 108 + HANDLE_GAP * (Math.max(extInputs.length, extOutputs.length) - 1))}
         isVisible={selected}
         lineStyle={{ borderColor: color, borderWidth: 1.5 }}
         handleStyle={{ width: 10, height: 10, borderColor: color, background: 'var(--bg-panel)' }}
@@ -112,7 +113,7 @@ export const FactoryNode = memo(({ id, data, selected }: NodeProps) => {
           position={Position.Left}
           id={factoryHandleId(id, port.item, 'in')}
           className="node-handle node-handle--in factory-node__handle"
-          style={{ top: `${inputPositions[i]}%` }}
+          style={{ top: inputPositions[i], transform: 'translateY(-50%)' }}
           title={`${port.item} · ${port.rate.toFixed(2)}/min`}
           data-label={`${port.item} ${port.rate.toFixed(1)}/m`}
         />
@@ -126,7 +127,7 @@ export const FactoryNode = memo(({ id, data, selected }: NodeProps) => {
           position={Position.Right}
           id={factoryHandleId(id, port.item, 'out')}
           className="node-handle node-handle--out factory-node__handle"
-          style={{ top: `${outputPositions[i]}%` }}
+          style={{ top: outputPositions[i], transform: 'translateY(-50%)' }}
           title={`${port.item} · ${port.rate.toFixed(2)}/min`}
           data-label={`${port.item} ${port.rate.toFixed(1)}/m`}
         />
